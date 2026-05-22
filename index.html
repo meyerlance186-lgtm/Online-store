@@ -3,158 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova SA | The Winter Shop</title>
+    <title>Nova SA | Debug View</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .modal-hidden { display: none; }
-        .modal-active { display: flex; }
-        .winter-gradient { background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%); }
-    </style>
 </head>
-<body class="winter-gradient text-gray-900 font-sans flex flex-col min-h-screen">
-
-    <div class="bg-slate-800 text-blue-200 text-center text-xs py-2 uppercase tracking-widest font-bold">
-        ❄️ Winter Essentials: Stay Warm, Stay Connected.
-    </div>
-
-    <nav class="bg-white/80 backdrop-blur-md shadow-sm p-4 flex justify-between items-center sticky top-0 z-40">
-        <div class="text-2xl font-black tracking-tighter text-slate-900">NOVA<span class="text-orange-500">.</span></div>
-        <button onclick="toggleModal('cartModal')" class="relative bg-slate-900 text-white px-5 py-2 rounded-full shadow hover:bg-black transition font-bold text-sm">
-            Cart (<span id="cartCount">0</span>)
-        </button>
-    </nav>
-
-    <header class="py-20 px-4 text-center">
-        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-slate-900 tracking-tight">Warmth for the Cold.</h1>
-        <p class="text-lg text-slate-600 max-w-xl mx-auto">Curated gear to keep you cozy and powered up through the Cape winter. Fast, local delivery.</p>
-    </header>
-
-    <main class="flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="productGrid"></div>
-    </main>
-
-    <div id="detailsModal" class="modal-hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-3xl w-full max-w-lg shadow-2xl border border-blue-50">
-            <h3 id="modalTitle" class="text-3xl font-extrabold mb-4 text-slate-900"></h3>
-            <p id="modalDesc" class="text-slate-600 mb-8 leading-relaxed"></p>
-            <div class="flex gap-4">
-                <button onclick="toggleModal('detailsModal')" class="flex-1 bg-slate-100 py-3 rounded-full font-bold hover:bg-slate-200 text-slate-700">Close</button>
-                <button id="modalAddBtn" class="flex-1 bg-orange-500 text-white py-3 rounded-full font-bold hover:bg-orange-600 shadow-lg shadow-orange-200">Add to Cart</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="cartModal" class="modal-hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-3xl w-full max-w-md shadow-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold">Your Winter Kit</h3>
-                <button onclick="toggleModal('cartModal')" class="text-slate-400 font-bold text-2xl">&times;</button>
-            </div>
-            <div id="cartItems" class="space-y-4 mb-6"></div>
-            <div class="border-t border-slate-100 pt-6">
-                <div class="flex justify-between font-bold text-xl mb-6 text-slate-900">
-                    <span>Total:</span>
-                    <span id="cartTotal">R0.00</span>
-                </div>
-                <button onclick="checkoutToPayFast()" class="w-full bg-orange-500 text-white py-4 rounded-full font-bold hover:bg-orange-600 shadow-lg shadow-orange-200 transition">
-                    Secure Checkout
-                </button>
-            </div>
-        </div>
-    </div>
-
+<body class="bg-gray-100 p-8">
+    <h1 class="text-2xl font-bold mb-4">Debug List (Check if these exist in your repo)</h1>
+    <ul id="debugList" class="bg-white p-4 rounded shadow"></ul>
     <script>
-        const products = [
-            { id: 1, name: "Rechargeable Hot Water Bottle", price: 479.00, img: "1000503924.jpg", desc: "Plugs in for 10 mins, stays hot.", longDesc: "Ditch the kettle. This electric bottle charges in minutes and holds heat for up to 4 hours. Perfect for warming up bed sheets or easing muscle aches on those freezing nights." },
-            { id: 2, name: "Wearable Fleece Hoodie (Unisex)", price: 599.00, img: "1000503928.jpg", desc: "One-size-fits-all plush warmth.", longDesc: "The ultimate couch companion. This oversized hoodie features a thick fleece lining that locks in body heat. It is unisex and one-size-fits-all, making it the perfect upgrade for the winter season or an easy gift." },
-            { id: 3, name: "Smart Foldable Warming Tray", price: 1499.00, img: "1000503939.jpg", desc: "Keep meals hot during winter.", longDesc: "Never let your dinner go cold again. This foldable tray keeps plates warm for hours, allowing you to enjoy a leisurely winter dinner without rushing." },
-            { id: 4, name: "Auto-Heated Commuter Gloves", price: 449.00, img: "1000504090.jpg", desc: "USB-powered warmth.", longDesc: "Essential gear for early morning commutes. These USB-powered gloves keep your hands nimble and warm, ensuring better grip and comfort in chilly weather." },
-            { id: 5, name: "Low-Wattage Mini Desktop Heater", price: 499.00, img: "1000504093.jpg", desc: "Inverter friendly desktop heat.", longDesc: "Designed for your desk. This compact heater provides immediate warmth without drawing too much power, making it the ideal solution for your home office during loadshedding." },
-            { id: 6, name: "Portable Gas Heater Adapter", price: 899.00, img: "1000504096.jpg", desc: "Grid-free heat.", longDesc: "Turn your standard camping gas cylinder into an emergency heater. Simple to use, robust, and provides essential, grid-free warmth when the power drops." },
-            { id: 7, name: "Thermal Fleece-Lined Leggings", price: 699.00, img: "1000504099.jpg", desc: "Ultimate thermal comfort.", longDesc: "Combine style and survival. These leggings are lined with a thick thermal fleece layer that feels like a blanket against your skin.<br><br><span class='text-orange-500 font-bold'>Delivery Notice: Please allow 14-16 days for shipping on this specific item.</span>" },
-            { id: 8, name: "Smart Temp Display Flask", price: 399.00, img: "1000504106.jpg", desc: "LED temp display.", longDesc: "Stop guessing if your tea is too hot. This smart flask features a real-time temperature display on the lid, keeping your drinks at the perfect warmth for up to 12 hours.<br><br><span class='text-orange-500 font-bold'>Delivery Notice: Please allow 4-6 working days for shipping on this specific item.</span>" },
-            { id: 9, name: "Mini UPS for WiFi Router", price: 899.00, origPrice: 1199.00, img: "1000504112.jpg", desc: "8+ hours of internet.", longDesc: "The winter must-have. Keep your WiFi router powered for hours, ensuring you stay connected for work or streaming even when the grid goes dark." },
-            { id: 10, name: "Motion Sensor LED Light", price: 249.00, origPrice: 349.00, img: "1000504115.jpg", desc: "Auto-light for mornings.", longDesc: "No more fumbling in the dark. These magnetic lights snap onto any surface and auto-activate when they sense motion." }
-        ];
-
-        let cart = [];
-
-        function renderProducts() {
-            const grid = document.getElementById('productGrid');
-            products.forEach(p => {
-                let priceDisplay = `<span class="font-black text-2xl text-slate-900">R${p.price.toFixed(2)}</span>`;
-                if (p.origPrice) {
-                    priceDisplay = `
-                        <div class="flex flex-col">
-                            <span class="text-xs text-slate-400 line-through">R${p.origPrice.toFixed(2)}</span>
-                            <span class="font-black text-2xl text-orange-600">R${p.price.toFixed(2)}</span>
-                        </div>
-                    `;
-                }
-
-                grid.innerHTML += `
-                    <div class="bg-white rounded-3xl shadow-lg shadow-blue-50 border border-blue-50 p-5 flex flex-col hover:shadow-xl transition duration-300">
-                        <img onclick="showDetails(${p.id})" src="${p.img}" alt="${p.name}" class="w-full h-56 object-cover rounded-2xl mb-5 cursor-pointer bg-slate-50">
-                        <h3 class="font-bold text-xl mb-1 text-slate-900">${p.name}</h3>
-                        <p class="text-slate-500 text-sm mb-6 flex-grow">${p.desc}</p>
-                        <div class="flex items-center justify-between mt-auto">
-                            ${priceDisplay}
-                            <button onclick="showDetails(${p.id})" class="bg-slate-100 text-slate-900 px-5 py-2.5 rounded-full text-sm font-bold hover:bg-orange-100 transition">Details</button>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function showDetails(id) {
-            const p = products.find(x => x.id === id);
-            document.getElementById('modalTitle').innerText = p.name;
-            document.getElementById('modalDesc').innerHTML = p.longDesc;
-            document.getElementById('modalAddBtn').onclick = () => { addToCart(p.id); toggleModal('detailsModal'); };
-            toggleModal('detailsModal');
-        }
-
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            cart.push({ ...product, qty: 1 });
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            document.getElementById('cartCount').innerText = cart.length;
-            const cartItems = document.getElementById('cartItems');
-            cartItems.innerHTML = cart.map((item, index) => `
-                <div class="flex justify-between items-center text-sm font-medium">
-                    <span>${item.name}</span>
-                    <span class="text-slate-900">R${item.price.toFixed(2)}</span>
-                </div>
-            `).join('');
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cartTotal').innerText = `R${total.toFixed(2)}`;
-        }
-
-        function toggleModal(id) {
-            document.getElementById(id).classList.toggle('modal-hidden');
-            document.getElementById(id).classList.toggle('modal-active');
-        }
-
-        function checkoutToPayFast() {
-            if (cart.length === 0) return alert("Your cart is empty!");
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const form = document.createElement("form");
-            form.action = "https://sandbox.payfast.co.za/eng/process"; 
-            form.method = "POST";
-            form.innerHTML = `
-                <input type="hidden" name="merchant_id" value="10000100">
-                <input type="hidden" name="merchant_key" value="46f0cd694581a">
-                <input type="hidden" name="amount" value="${total.toFixed(2)}">
-                <input type="hidden" name="item_name" value="Nova SA Order">
-            `;
-            document.body.appendChild(form);
-            form.submit();
-        }
-
-        renderProducts();
+        const files = ["1000503924.jpg", "1000503928.jpg", "1000503939.jpg", "1000504090.jpg", "1000504093.jpg", "1000504096.jpg", "1000504099.jpg", "1000504106.jpg", "1000504112.jpg", "1000504115.jpg"];
+        const list = document.getElementById('debugList');
+        files.forEach(f => {
+            list.innerHTML += `<li class="p-2 border-b">File: <b>${f}</b> <a href="${f}" target="_blank" class="text-blue-500">(Click to test link)</a></li>`;
+        });
     </script>
 </body>
 </html>
