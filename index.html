@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova SA | Smart Living Solutions</title>
+    <title>Nova SA | Winter Survival Essentials</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .modal-hidden { display: none; }
@@ -14,7 +13,7 @@
 <body class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
 
     <div class="bg-black text-white text-center text-xs py-2 uppercase tracking-widest font-semibold">
-        Free local delivery in SA on orders over R500
+        Winter Sale: Free local delivery via The Courier Guy on orders over R500
     </div>
 
     <nav class="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-40">
@@ -24,13 +23,13 @@
         </button>
     </nav>
 
-    <header class="bg-white py-16 px-4 text-center border-b border-gray-200">
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Smart Solutions for South African Living.</h1>
-        <p class="text-gray-500 max-w-xl mx-auto mb-8">Curated, high-utility products designed to make your daily routine easier. Sourced globally, shipped locally.</p>
+    <header class="bg-white py-16 px-4 text-center border-b border-gray-200 bg-gradient-to-b from-slate-100 to-slate-200">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900">Beat the South African Winter.</h1>
+        <p class="text-gray-600 max-w-xl mx-auto mb-8">Curated, high-utility products designed to keep you warm and powered up. Local stock, delivered in 2-4 days.</p>
     </header>
 
     <main class="flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full">
-        <h2 class="text-2xl font-bold mb-6 border-b pb-2">Trending Right Now</h2>
+        <h2 class="text-2xl font-bold mb-6 border-b pb-2">Trending This Winter</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="productGrid">
             </div>
     </main>
@@ -78,24 +77,24 @@
                 <p>In compliance with the CPA, all electronic goods carry a 6-month implied warranty against factory defects. Should a product fail under normal use, it may be returned for replacement or refund. Unused products in their original, sealed packaging may be returned within 14 days of receipt.</p>
                 
                 <h4 class="font-bold text-black">3. Shipping Policy</h4>
-                <p>Orders are dispatched via our supplier network. Local warehousing ensures delivery within 3-7 business days across major South African metros. Outlying areas may take up to 10 days.</p>
+                <p>Orders are dispatched via our local supplier network. Warehousing in Johannesburg and Cape Town ensures delivery within 2-4 business days across major South African metros.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- 1. PRODUCT DATABASE ---
+        // --- 1. LOCAL ZA WINTER PRODUCT DATABASE ---
         const products = [
-            { id: 1, name: "Smart Foldable Electric Warming Tray", price: 599.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Warming+Tray", desc: "Keep food warm for hours. Rolls up for easy storage." },
-            { id: 2, name: "Magnetic Auto-Align Phone Mount", price: 249.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Phone+Mount", desc: "Military-grade dashboard grip for seamless commuting." },
-            { id: 3, name: "Ultrasonic Silicone Face Cleanser", price: 199.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Face+Cleanser", desc: "Spa-level daily skin exfoliation. Waterproof & rechargeable." },
-            { id: 4, name: "Portable Solar Power Bank", price: 450.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Solar+Power+Bank", desc: "Heavy-duty dual USB solar charger. Essential for load shedding backups." },
-            { id: 5, name: "Anti-Theft Commuter Backpack", price: 389.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Anti-Theft+Backpack", desc: "Hidden zippers and slash-proof material. Perfect for trains and taxis." },
-            { id: 6, name: "Wireless LED Strip Lights", price: 175.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=LED+Strip+Lights", desc: "Motion-activated under-cabinet lighting. Stick-on installation anywhere." },
-            { id: 7, name: "Ergonomic Memory Foam Cushion", price: 299.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Memory+Foam+Cushion", desc: "Relieves lower back pain. Perfect for long drives or office desk setups." },
-            { id: 8, name: "Rechargeable Lint Remover", price: 149.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Lint+Remover", desc: "Restores old jerseys, jackets, and couches to brand new condition." },
-            { id: 9, name: "Smart Bluetooth Body Scale", price: 340.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Smart+Scale", desc: "Tracks BMI, muscle mass, and body fat percentage via a free mobile app." },
-            { id: 10, name: "Cordless Car Vacuum Cleaner", price: 275.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Car+Vacuum", desc: "High suction power in a compact size. Recharges via any USB port." }
+            { id: 1, name: "Rechargeable Electric Hot Water Bottle", price: 199.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Electric+Water+Bottle", desc: "Plugs in for 10 minutes, stays hot for up to 4 hours. No boiling water needed." },
+            { id: 2, name: "Wearable Fleece Blanket Hoodie", price: 450.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Fleece+Blanket+Hoodie", desc: "Ultra-plush, one-size-fits-all wearable blanket. Perfect for cold evenings." },
+            { id: 3, name: "Smart Foldable Electric Warming Tray", price: 599.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Warming+Tray", desc: "Keep food warm for hours. Rolls up for easy storage." },
+            { id: 4, name: "Auto-Heated Winter Commuter Gloves", price: 350.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Heated+Gloves", desc: "USB-powered heating. Essential for scooter drivers and early morning commutes." },
+            { id: 5, name: "Low-Wattage Mini Desktop Heater", price: 299.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Mini+Desktop+Heater", desc: "Energy efficient and won't trip your inverter. Perfect for the home office." },
+            { id: 6, name: "Portable Gas Heater & Stove Adapter", price: 350.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Gas+Heater+Adapter", desc: "Screws directly onto standard CADAC cylinders for instant, grid-free heat." },
+            { id: 7, name: "Thermal Fleece-Lined Winter Leggings", price: 250.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Fleece+Leggings", desc: "Looks like sheer pantyhose, but lined with thick, warm fleece." },
+            { id: 8, name: "Smart Thermos Flask with Temp Display", price: 189.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Smart+Thermos", desc: "LED lid shows exact liquid temperature. Keeps coffee hot for 12 hours." },
+            { id: 9, name: "Mini UPS for WiFi Router (10,000mAh)", price: 499.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Mini+UPS", desc: "Keep your internet running during winter storms and grid drops. Up to 8 hours backup." },
+            { id: 10, name: "Rechargeable Magnetic LED Motion Light", price: 249.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Motion+LED+Light", desc: "Auto-activates in the dark. Perfect for dark winter mornings." }
         ];
 
         let cart = [];
@@ -103,7 +102,7 @@
         // --- 2. RENDER STORE ---
         function renderProducts() {
             const grid = document.getElementById('productGrid');
-            grid.innerHTML = ''; // Clear before rendering
+            grid.innerHTML = ''; 
             products.forEach(p => {
                 grid.innerHTML += `
                     <div class="bg-white rounded-lg shadow border p-4 flex flex-col hover:shadow-lg transition">
