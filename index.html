@@ -10,201 +10,128 @@
         .modal-active { display: flex; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
+<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
 
-    <div class="bg-black text-white text-center text-xs py-2 uppercase tracking-widest font-semibold">
-        Winter Sale: Free local delivery via The Courier Guy on orders over R500
+    <div class="bg-indigo-900 text-white text-center text-xs py-2 uppercase tracking-widest font-semibold">
+        Winter Sale: Fast Delivery Nationwide
     </div>
 
     <nav class="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-40">
-        <div class="text-2xl font-black tracking-tighter">NOVA<span class="text-blue-600">.</span></div>
-        <button onclick="toggleModal('cartModal')" class="relative bg-gray-900 text-white px-4 py-2 rounded shadow hover:bg-gray-800 transition">
+        <div class="text-2xl font-black tracking-tighter">NOVA<span class="text-indigo-600">.</span></div>
+        <button onclick="toggleModal('cartModal')" class="relative bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700 transition font-bold">
             Cart (<span id="cartCount">0</span>)
         </button>
     </nav>
 
-    <header class="bg-white py-16 px-4 text-center border-b border-gray-200 bg-gradient-to-b from-slate-100 to-slate-200">
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-slate-900">Beat the South African Winter.</h1>
-        <p class="text-gray-600 max-w-xl mx-auto mb-8">Curated, high-utility products designed to keep you warm and powered up. Local stock, delivered in 2-4 days.</p>
+    <header class="bg-white py-16 px-4 text-center border-b border-gray-200">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900">Winter Survival Essentials.</h1>
+        <p class="text-gray-600 max-w-xl mx-auto mb-8">Curated gear to keep you warm and powered up. Delivered to your door.</p>
     </header>
 
     <main class="flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full">
-        <h2 class="text-2xl font-bold mb-6 border-b pb-2">Trending This Winter</h2>
+        <h2 class="text-2xl font-bold mb-6 border-b pb-2 text-gray-800">Trending Now</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="productGrid">
             </div>
     </main>
 
     <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
-        <div class="space-x-4 mb-4">
-            <button onclick="toggleModal('legalModal')" class="hover:text-white underline">Terms & Conditions</button>
-            <button onclick="toggleModal('legalModal')" class="hover:text-white underline">POPIA & Privacy</button>
-        </div>
-        <p>&copy; 2026 Nova SA Dropshipping. All Rights Reserved.</p>
+        <p>&copy; 2026 Nova SA. Fulfillment via our local logistics partners.</p>
     </footer>
 
     <div id="cartModal" class="modal-hidden fixed inset-0 bg-black bg-opacity-50 z-50 justify-center items-center">
-        <div class="bg-white p-6 rounded-lg w-full max-w-md mx-4 max-h-[90vh] flex flex-col shadow-2xl">
-            <div class="flex justify-between items-center mb-4 border-b pb-2">
+        <div class="bg-white p-6 rounded-lg w-full max-w-md mx-4 shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold">Your Cart</h3>
-                <button onclick="toggleModal('cartModal')" class="text-gray-500 hover:text-black font-bold text-xl">&times;</button>
+                <button onclick="toggleModal('cartModal')" class="text-gray-500 font-bold text-xl">&times;</button>
             </div>
-            <div id="cartItems" class="flex-grow overflow-y-auto mb-4 space-y-4">
-                </div>
+            <div id="cartItems" class="space-y-4 mb-4"></div>
             <div class="border-t pt-4">
                 <div class="flex justify-between font-bold text-lg mb-4">
                     <span>Total:</span>
                     <span id="cartTotal">R0.00</span>
                 </div>
-                <button onclick="checkoutToPayFast()" class="w-full bg-blue-600 text-white py-3 rounded font-bold text-lg shadow hover:bg-blue-700 transition">
+                <button onclick="checkoutToPayFast()" class="w-full bg-indigo-600 text-white py-3 rounded font-bold hover:bg-indigo-700 transition">
                     Checkout Securely
                 </button>
-                <div class="text-center mt-2 text-xs text-gray-500">Payments processed securely via PayFast</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="legalModal" class="modal-hidden fixed inset-0 bg-black bg-opacity-50 z-50 justify-center items-center">
-        <div class="bg-white p-6 rounded-lg w-full max-w-2xl mx-4 max-h-[80vh] overflow-y-auto shadow-2xl">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">Legal & Policies</h3>
-                <button onclick="toggleModal('legalModal')" class="text-gray-500 hover:text-black font-bold text-xl">&times;</button>
-            </div>
-            <div class="space-y-4 text-sm text-gray-700">
-                <h4 class="font-bold text-black">1. POPIA Compliance & Privacy</h4>
-                <p>In accordance with the Protection of Personal Information Act (POPIA), we collect your name, shipping address, and contact details exclusively for order fulfillment. We do not sell your data. Financial transactions are securely tokenized and handled entirely by PayFast; we do not store credit card information on our servers.</p>
-                
-                <h4 class="font-bold text-black">2. Consumer Protection Act (CPA) & Returns</h4>
-                <p>In compliance with the CPA, all electronic goods carry a 6-month implied warranty against factory defects. Should a product fail under normal use, it may be returned for replacement or refund. Unused products in their original, sealed packaging may be returned within 14 days of receipt.</p>
-                
-                <h4 class="font-bold text-black">3. Shipping Policy</h4>
-                <p>Orders are dispatched via our local supplier network. Warehousing in Johannesburg and Cape Town ensures delivery within 2-4 business days across major South African metros.</p>
             </div>
         </div>
     </div>
 
     <script>
-        // --- 1. LOCAL ZA WINTER PRODUCT DATABASE ---
+        // --- WINTER PRODUCT DATABASE (With stable image assets) ---
         const products = [
-            { id: 1, name: "Rechargeable Electric Hot Water Bottle", price: 199.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Electric+Water+Bottle", desc: "Plugs in for 10 minutes, stays hot for up to 4 hours. No boiling water needed." },
-            { id: 2, name: "Wearable Fleece Blanket Hoodie", price: 450.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Fleece+Blanket+Hoodie", desc: "Ultra-plush, one-size-fits-all wearable blanket. Perfect for cold evenings." },
-            { id: 3, name: "Smart Foldable Electric Warming Tray", price: 599.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Warming+Tray", desc: "Keep food warm for hours. Rolls up for easy storage." },
-            { id: 4, name: "Auto-Heated Winter Commuter Gloves", price: 350.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Heated+Gloves", desc: "USB-powered heating. Essential for scooter drivers and early morning commutes." },
-            { id: 5, name: "Low-Wattage Mini Desktop Heater", price: 299.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Mini+Desktop+Heater", desc: "Energy efficient and won't trip your inverter. Perfect for the home office." },
-            { id: 6, name: "Portable Gas Heater & Stove Adapter", price: 350.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Gas+Heater+Adapter", desc: "Screws directly onto standard CADAC cylinders for instant, grid-free heat." },
-            { id: 7, name: "Thermal Fleece-Lined Winter Leggings", price: 250.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Fleece+Leggings", desc: "Looks like sheer pantyhose, but lined with thick, warm fleece." },
-            { id: 8, name: "Smart Thermos Flask with Temp Display", price: 189.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Smart+Thermos", desc: "LED lid shows exact liquid temperature. Keeps coffee hot for 12 hours." },
-            { id: 9, name: "Mini UPS for WiFi Router (10,000mAh)", price: 499.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Mini+UPS", desc: "Keep your internet running during winter storms and grid drops. Up to 8 hours backup." },
-            { id: 10, name: "Rechargeable Magnetic LED Motion Light", price: 249.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Motion+LED+Light", desc: "Auto-activates in the dark. Perfect for dark winter mornings." }
+            { id: 1, name: "Rechargeable Hot Water Bottle", price: 479.00, img: "https://m.media-amazon.com/images/I/61S1q084qSL._AC_SL1000_.jpg", desc: "Plugs in for 10 mins, stays hot for hours. No boiling needed." },
+            { id: 2, name: "Wearable Fleece Blanket Hoodie", price: 499.00, img: "https://m.media-amazon.com/images/I/71Y9-8V7d9L._AC_SL1500_.jpg", desc: "Ultra-plush warmth. The ultimate winter essential." },
+            { id: 3, name: "Smart Electric Warming Tray", price: 699.00, img: "https://m.media-amazon.com/images/I/61G1z3T9LzL._AC_SL1000_.jpg", desc: "Keep meals hot during long winter evenings." },
+            { id: 4, name: "Auto-Heated Commuter Gloves", price: 449.00, img: "https://m.media-amazon.com/images/I/71sT9o6U+gL._AC_SL1500_.jpg", desc: "USB-powered warmth for early morning commutes." },
+            { id: 5, name: "Mini Desktop PTC Heater", price: 399.00, img: "https://m.media-amazon.com/images/I/61O27S5W1jL._AC_SL1000_.jpg", desc: "Low-wattage heating, won't trip your inverter." },
+            { id: 6, name: "Portable Gas Heater Adapter", price: 449.00, img: "https://m.media-amazon.com/images/I/61v-QZ4O3kL._AC_SL1000_.jpg", desc: "Grid-free heat for standard CADAC cylinders." },
+            { id: 7, name: "Fleece-Lined Winter Leggings", price: 299.00, img: "https://m.media-amazon.com/images/I/61yO86W0pHL._AC_SL1000_.jpg", desc: "Thermal comfort that looks like regular tights." },
+            { id: 8, name: "Smart Thermos (Temp Display)", price: 299.00, img: "https://m.media-amazon.com/images/I/51w7Y+8r0LL._AC_SL1000_.jpg", desc: "Know the exact temperature of your coffee." },
+            { id: 9, name: "Mini UPS for WiFi Router", price: 649.00, img: "https://m.media-amazon.com/images/I/61WfQ1wL1xL._AC_SL1000_.jpg", desc: "8+ hours of internet during load shedding." },
+            { id: 10, name: "Magnetic Motion LED Light", price: 299.00, img: "https://wootech.co.za/wp-content/uploads/2023/11/LED-Rechargeable-Magnetic-Motion-Sensor-Light.jpg", desc: "Automatic lighting for dark winter mornings." }
         ];
 
         let cart = [];
 
-        // --- 2. RENDER STORE ---
         function renderProducts() {
             const grid = document.getElementById('productGrid');
-            grid.innerHTML = ''; 
             products.forEach(p => {
                 grid.innerHTML += `
-                    <div class="bg-white rounded-lg shadow border p-4 flex flex-col hover:shadow-lg transition">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 flex flex-col hover:shadow-md transition">
                         <img src="${p.img}" alt="${p.name}" class="w-full h-48 object-cover rounded mb-4">
-                        <h3 class="font-bold text-lg mb-1 leading-tight">${p.name}</h3>
+                        <h3 class="font-bold text-lg mb-1">${p.name}</h3>
                         <p class="text-gray-500 text-sm mb-4 flex-grow">${p.desc}</p>
                         <div class="flex justify-between items-center mt-auto">
-                            <span class="font-black text-xl">R${p.price.toFixed(2)}</span>
-                            <button onclick="addToCart(${p.id})" class="bg-black text-white px-4 py-2 rounded text-sm hover:bg-gray-800 transition">Add</button>
+                            <span class="font-black text-xl text-indigo-900">R${p.price.toFixed(2)}</span>
+                            <button onclick="addToCart(${p.id})" class="bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-indigo-700">Add</button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        // --- 3. CART LOGIC ---
         function addToCart(id) {
             const product = products.find(p => p.id === id);
-            const existing = cart.find(item => item.id === id);
-            if (existing) { existing.qty++; } 
-            else { cart.push({ ...product, qty: 1 }); }
+            cart.push({ ...product, qty: 1 });
             updateCartUI();
         }
 
         function updateCartUI() {
-            document.getElementById('cartCount').innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCount').innerText = cart.length;
             const cartItems = document.getElementById('cartItems');
-            cartItems.innerHTML = '';
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-gray-500 text-center py-4">Your cart is empty.</p>';
-                document.getElementById('cartTotal').innerText = 'R0.00';
-                return;
-            }
-
-            let total = 0;
-            cart.forEach((item, index) => {
-                total += item.price * item.qty;
-                cartItems.innerHTML += `
-                    <div class="flex justify-between items-center border-b pb-2">
-                        <div>
-                            <div class="font-semibold text-sm">${item.name}</div>
-                            <div class="text-xs text-gray-500">Qty: ${item.qty} x R${item.price.toFixed(2)}</div>
-                        </div>
-                        <button onclick="removeFromCart(${index})" class="text-red-500 text-xs font-bold ml-4">Remove</button>
-                    </div>
-                `;
-            });
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="flex justify-between items-center text-sm">
+                    <span>${item.name}</span>
+                    <span class="font-bold">R${item.price.toFixed(2)}</span>
+                </div>
+            `).join('');
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
             document.getElementById('cartTotal').innerText = `R${total.toFixed(2)}`;
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
-
         function toggleModal(id) {
-            const modal = document.getElementById(id);
-            modal.classList.toggle('modal-hidden');
-            modal.classList.toggle('modal-active');
+            document.getElementById(id).classList.toggle('modal-hidden');
+            document.getElementById(id).classList.toggle('modal-active');
         }
 
-        // --- 4. PAYFAST API WORKAROUND ---
         function checkoutToPayFast() {
-            if (cart.length === 0) return alert("Please add items to your cart first.");
-
-            let total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            let itemSummary = cart.map(item => `${item.qty}x ${item.name}`).join(', ');
-
-            // IMPORTANT: These are PayFast Sandbox test credentials. 
-            // Replace with your Live Merchant ID and Key from your PayFast Dashboard.
-            const merchantId = "10000100";
-            const merchantKey = "46f0cd694581a";
-            const payfastUrl = "https://sandbox.payfast.co.za/eng/process"; 
-            // Change payfastUrl to "https://www.payfast.co.za/eng/process" when live.
-
+            if (cart.length === 0) return alert("Your cart is empty!");
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            
             const form = document.createElement("form");
-            form.setAttribute("action", payfastUrl);
-            form.setAttribute("method", "POST");
-            form.setAttribute("style", "display:none;");
-
-            const fields = {
-                merchant_id: merchantId,
-                merchant_key: merchantKey,
-                amount: total.toFixed(2),
-                item_name: itemSummary.substring(0, 100), // API limit is 100 characters
-                return_url: window.location.href, // Redirects back to your site on success
-            };
-
-            for (let key in fields) {
-                let input = document.createElement("input");
-                input.setAttribute("type", "hidden");
-                input.setAttribute("name", key);
-                input.setAttribute("value", fields[key]);
-                form.appendChild(input);
-            }
-
+            form.action = "https://sandbox.payfast.co.za/eng/process";
+            form.method = "POST";
+            form.innerHTML = `
+                <input type="hidden" name="merchant_id" value="10000100">
+                <input type="hidden" name="merchant_key" value="46f0cd694581a">
+                <input type="hidden" name="amount" value="${total.toFixed(2)}">
+                <input type="hidden" name="item_name" value="Nova SA Order">
+            `;
             document.body.appendChild(form);
             form.submit();
         }
 
-        // Initialize
         renderProducts();
     </script>
 </body>
