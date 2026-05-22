@@ -3,73 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova SA | Winter Survival Essentials</title>
+    <title>Nova SA | The Winter Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .modal-hidden { display: none; }
         .modal-active { display: flex; }
+        .winter-gradient { background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans flex flex-col min-h-screen">
+<body class="winter-gradient text-gray-900 font-sans flex flex-col min-h-screen">
 
-    <div class="bg-indigo-900 text-white text-center text-xs py-2 uppercase tracking-widest font-semibold">
-        Winter Sale: Fast Delivery Nationwide
+    <div class="bg-slate-800 text-blue-200 text-center text-xs py-2 uppercase tracking-widest font-bold">
+        ❄️ Winter Essentials: Stay Warm, Stay Connected.
     </div>
 
-    <nav class="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-40">
-        <div class="text-2xl font-black tracking-tighter">NOVA<span class="text-indigo-600">.</span></div>
-        <button onclick="toggleModal('cartModal')" class="relative bg-indigo-600 text-white px-4 py-2 rounded shadow hover:bg-indigo-700 transition font-bold">
+    <nav class="bg-white/80 backdrop-blur-md shadow-sm p-4 flex justify-between items-center sticky top-0 z-40">
+        <div class="text-2xl font-black tracking-tighter text-slate-900">NOVA<span class="text-orange-500">.</span></div>
+        <button onclick="toggleModal('cartModal')" class="relative bg-slate-900 text-white px-5 py-2 rounded-full shadow hover:bg-black transition font-bold text-sm">
             Cart (<span id="cartCount">0</span>)
         </button>
     </nav>
 
-    <header class="bg-white py-16 px-4 text-center border-b border-gray-200">
-        <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-gray-900">Winter Survival Essentials.</h1>
-        <p class="text-gray-600 max-w-xl mx-auto mb-8">Curated gear to keep you warm and powered up. Delivered to your door.</p>
+    <header class="py-20 px-4 text-center">
+        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-slate-900 tracking-tight">Warmth for the Cold.</h1>
+        <p class="text-lg text-slate-600 max-w-xl mx-auto">Curated gear to keep you cozy and powered up through the Cape winter. Fast, local delivery.</p>
     </header>
 
     <main class="flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full">
-        <h2 class="text-2xl font-bold mb-6 border-b pb-2 text-gray-800">Trending Now</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="productGrid">
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="productGrid"></div>
     </main>
 
-    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
-        <p>&copy; 2026 Nova SA. Fulfillment via our local logistics partners.</p>
-    </footer>
-
-    <div id="cartModal" class="modal-hidden fixed inset-0 bg-black bg-opacity-50 z-50 justify-center items-center">
-        <div class="bg-white p-6 rounded-lg w-full max-w-md mx-4 shadow-2xl">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-xl font-bold">Your Cart</h3>
-                <button onclick="toggleModal('cartModal')" class="text-gray-500 font-bold text-xl">&times;</button>
+    <div id="detailsModal" class="modal-hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 justify-center items-center p-4">
+        <div class="bg-white p-8 rounded-3xl w-full max-w-lg shadow-2xl border border-blue-50">
+            <h3 id="modalTitle" class="text-3xl font-extrabold mb-4 text-slate-900"></h3>
+            <p id="modalDesc" class="text-slate-600 mb-8 leading-relaxed"></p>
+            <div class="flex gap-4">
+                <button onclick="toggleModal('detailsModal')" class="flex-1 bg-slate-100 py-3 rounded-full font-bold hover:bg-slate-200 text-slate-700">Close</button>
+                <button id="modalAddBtn" class="flex-1 bg-orange-500 text-white py-3 rounded-full font-bold hover:bg-orange-600 shadow-lg shadow-orange-200">Add to Cart</button>
             </div>
-            <div id="cartItems" class="space-y-4 mb-4"></div>
-            <div class="border-t pt-4">
-                <div class="flex justify-between font-bold text-lg mb-4">
+        </div>
+    </div>
+
+    <div id="cartModal" class="modal-hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 justify-center items-center p-4">
+        <div class="bg-white p-8 rounded-3xl w-full max-w-md shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Your Winter Kit</h3>
+                <button onclick="toggleModal('cartModal')" class="text-slate-400 font-bold text-2xl">&times;</button>
+            </div>
+            <div id="cartItems" class="space-y-4 mb-6"></div>
+            <div class="border-t border-slate-100 pt-6">
+                <div class="flex justify-between font-bold text-xl mb-6 text-slate-900">
                     <span>Total:</span>
                     <span id="cartTotal">R0.00</span>
                 </div>
-                <button onclick="checkoutToPayFast()" class="w-full bg-indigo-600 text-white py-3 rounded font-bold hover:bg-indigo-700 transition">
-                    Checkout Securely
+                <button onclick="checkoutToPayFast()" class="w-full bg-orange-500 text-white py-4 rounded-full font-bold hover:bg-orange-600 shadow-lg shadow-orange-200 transition">
+                    Secure Checkout
                 </button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- WINTER PRODUCT DATABASE (With stable image assets) ---
         const products = [
-            { id: 1, name: "Rechargeable Hot Water Bottle", price: 479.00, img: "https://m.media-amazon.com/images/I/61S1q084qSL._AC_SL1000_.jpg", desc: "Plugs in for 10 mins, stays hot for hours. No boiling needed." },
-            { id: 2, name: "Wearable Fleece Blanket Hoodie", price: 499.00, img: "https://m.media-amazon.com/images/I/71Y9-8V7d9L._AC_SL1500_.jpg", desc: "Ultra-plush warmth. The ultimate winter essential." },
-            { id: 3, name: "Smart Electric Warming Tray", price: 699.00, img: "https://m.media-amazon.com/images/I/61G1z3T9LzL._AC_SL1000_.jpg", desc: "Keep meals hot during long winter evenings." },
-            { id: 4, name: "Auto-Heated Commuter Gloves", price: 449.00, img: "https://m.media-amazon.com/images/I/71sT9o6U+gL._AC_SL1500_.jpg", desc: "USB-powered warmth for early morning commutes." },
-            { id: 5, name: "Mini Desktop PTC Heater", price: 399.00, img: "https://m.media-amazon.com/images/I/61O27S5W1jL._AC_SL1000_.jpg", desc: "Low-wattage heating, won't trip your inverter." },
-            { id: 6, name: "Portable Gas Heater Adapter", price: 449.00, img: "https://m.media-amazon.com/images/I/61v-QZ4O3kL._AC_SL1000_.jpg", desc: "Grid-free heat for standard CADAC cylinders." },
-            { id: 7, name: "Fleece-Lined Winter Leggings", price: 299.00, img: "https://m.media-amazon.com/images/I/61yO86W0pHL._AC_SL1000_.jpg", desc: "Thermal comfort that looks like regular tights." },
-            { id: 8, name: "Smart Thermos (Temp Display)", price: 299.00, img: "https://m.media-amazon.com/images/I/51w7Y+8r0LL._AC_SL1000_.jpg", desc: "Know the exact temperature of your coffee." },
-            { id: 9, name: "Mini UPS for WiFi Router", price: 649.00, img: "https://m.media-amazon.com/images/I/61WfQ1wL1xL._AC_SL1000_.jpg", desc: "8+ hours of internet during load shedding." },
-            { id: 10, name: "Magnetic Motion LED Light", price: 299.00, img: "https://wootech.co.za/wp-content/uploads/2023/11/LED-Rechargeable-Magnetic-Motion-Sensor-Light.jpg", desc: "Automatic lighting for dark winter mornings." }
+            { id: 1, name: "Rechargeable Hot Water Bottle", price: 479.00, img: "https://m.media-amazon.com/images/I/61S1q084qSL._AC_SL1000_.jpg", desc: "Plugs in for 10 mins, stays hot for hours.", longDesc: "Ditch the kettle. This electric bottle charges in minutes and holds heat for up to 4 hours. Perfect for warming up bed sheets or easing muscle aches on those freezing Cape Town nights." },
+            { id: 2, name: "Wearable Fleece Hoodie", price: 499.00, img: "https://m.media-amazon.com/images/I/71Y9-8V7d9L._AC_SL1500_.jpg", desc: "Ultra-plush warmth.", longDesc: "The ultimate couch companion. This oversized hoodie features a thick fleece lining that locks in body heat. It's one-size-fits-all, making it the perfect upgrade for the winter season." },
+            { id: 3, name: "Electric Warming Tray", price: 699.00, img: "https://m.media-amazon.com/images/I/61G1z3T9LzL._AC_SL1000_.jpg", desc: "Keep meals hot during winter.", longDesc: "Never let your dinner go cold again. This foldable tray keeps plates warm for hours, allowing you to enjoy a leisurely winter dinner without rushing." },
+            { id: 4, name: "Heated Commuter Gloves", price: 449.00, img: "https://m.media-amazon.com/images/I/71sT9o6U+gL._AC_SL1500_.jpg", desc: "USB-powered warmth.", longDesc: "Essential gear for early morning commutes. These USB-powered gloves keep your hands nimble and warm, ensuring better grip and comfort in chilly weather." },
+            { id: 5, name: "Mini Desktop Heater", price: 399.00, img: "https://m.media-amazon.com/images/I/61O27S5W1jL._AC_SL1000_.jpg", desc: "Low-wattage, inverter friendly.", longDesc: "Designed for your desk. This compact heater provides immediate warmth without drawing too much power, making it the ideal solution for your home office during loadshedding." },
+            { id: 6, name: "Gas Heater Adapter", price: 449.00, img: "https://m.media-amazon.com/images/I/61v-QZ4O3kL._AC_SL1000_.jpg", desc: "Grid-free heat.", longDesc: "Turn your standard camping gas cylinder into an emergency heater. Simple to use, robust, and provides essential, grid-free warmth." },
+            { id: 7, name: "Fleece-Lined Leggings", price: 299.00, img: "https://m.media-amazon.com/images/I/61yO86W0pHL._AC_SL1000_.jpg", desc: "Thermal comfort.", longDesc: "Combine style and survival. These leggings are lined with a thick thermal fleece layer that feels like a blanket against your skin." },
+            { id: 8, name: "Smart Temp Flask", price: 299.00, img: "https://m.media-amazon.com/images/I/51w7Y+8r0LL._AC_SL1000_.jpg", desc: "LED temp display.", longDesc: "Stop guessing if your tea is too hot. This smart flask features a real-time temperature display on the lid, keeping your drinks at the perfect warmth for up to 12 hours." },
+            { id: 9, name: "Mini UPS for WiFi Router", price: 649.00, img: "https://m.media-amazon.com/images/I/61WfQ1wL1xL._AC_SL1000_.jpg", desc: "8+ hours of internet.", longDesc: "The winter must-have. Keep your WiFi router powered for hours, ensuring you stay connected for work or streaming even when the grid goes dark." },
+            { id: 10, name: "Motion LED Light", price: 299.00, img: "https://wootech.co.za/wp-content/uploads/2023/11/LED-Rechargeable-Magnetic-Motion-Sensor-Light.jpg", desc: "Auto-light for mornings.", longDesc: "No more fumbling in the dark. These magnetic lights snap onto any surface and auto-activate when they sense motion." }
         ];
 
         let cart = [];
@@ -78,17 +83,25 @@
             const grid = document.getElementById('productGrid');
             products.forEach(p => {
                 grid.innerHTML += `
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 flex flex-col hover:shadow-md transition">
-                        <img src="${p.img}" alt="${p.name}" class="w-full h-48 object-cover rounded mb-4">
-                        <h3 class="font-bold text-lg mb-1">${p.name}</h3>
-                        <p class="text-gray-500 text-sm mb-4 flex-grow">${p.desc}</p>
-                        <div class="flex justify-between items-center mt-auto">
-                            <span class="font-black text-xl text-indigo-900">R${p.price.toFixed(2)}</span>
-                            <button onclick="addToCart(${p.id})" class="bg-indigo-600 text-white px-6 py-2 rounded-lg text-sm font-bold hover:bg-indigo-700">Add</button>
+                    <div class="bg-white rounded-3xl shadow-lg shadow-blue-50 border border-blue-50 p-5 flex flex-col hover:shadow-xl transition duration-300">
+                        <img onclick="showDetails(${p.id})" src="${p.img}" alt="${p.name}" class="w-full h-56 object-cover rounded-2xl mb-5 cursor-pointer">
+                        <h3 class="font-bold text-xl mb-1 text-slate-900">${p.name}</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow">${p.desc}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-black text-2xl text-slate-900">R${p.price.toFixed(2)}</span>
+                            <button onclick="showDetails(${p.id})" class="bg-slate-100 text-slate-900 px-5 py-2.5 rounded-full text-sm font-bold hover:bg-orange-100 transition">Details</button>
                         </div>
                     </div>
                 `;
             });
+        }
+
+        function showDetails(id) {
+            const p = products.find(x => x.id === id);
+            document.getElementById('modalTitle').innerText = p.name;
+            document.getElementById('modalDesc').innerText = p.longDesc;
+            document.getElementById('modalAddBtn').onclick = () => { addToCart(p.id); toggleModal('detailsModal'); };
+            toggleModal('detailsModal');
         }
 
         function addToCart(id) {
@@ -101,9 +114,9 @@
             document.getElementById('cartCount').innerText = cart.length;
             const cartItems = document.getElementById('cartItems');
             cartItems.innerHTML = cart.map((item, index) => `
-                <div class="flex justify-between items-center text-sm">
+                <div class="flex justify-between items-center text-sm font-medium">
                     <span>${item.name}</span>
-                    <span class="font-bold">R${item.price.toFixed(2)}</span>
+                    <span class="text-slate-900">R${item.price.toFixed(2)}</span>
                 </div>
             `).join('');
             const total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -118,7 +131,6 @@
         function checkoutToPayFast() {
             if (cart.length === 0) return alert("Your cart is empty!");
             const total = cart.reduce((sum, item) => sum + item.price, 0);
-            
             const form = document.createElement("form");
             form.action = "https://sandbox.payfast.co.za/eng/process";
             form.method = "POST";
