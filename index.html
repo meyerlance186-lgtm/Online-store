@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,12 +13,10 @@
 </head>
 <body class="bg-gray-100 text-gray-800 font-sans flex flex-col min-h-screen">
 
-    <!-- Announcement Bar -->
     <div class="bg-black text-white text-center text-xs py-2 uppercase tracking-widest font-semibold">
         Free local delivery in SA on orders over R500
     </div>
 
-    <!-- Navigation -->
     <nav class="bg-white shadow-sm p-4 flex justify-between items-center sticky top-0 z-40">
         <div class="text-2xl font-black tracking-tighter">NOVA<span class="text-blue-600">.</span></div>
         <button onclick="toggleModal('cartModal')" class="relative bg-gray-900 text-white px-4 py-2 rounded shadow hover:bg-gray-800 transition">
@@ -25,21 +24,17 @@
         </button>
     </nav>
 
-    <!-- Hero Section -->
     <header class="bg-white py-16 px-4 text-center border-b border-gray-200">
         <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Smart Solutions for South African Living.</h1>
         <p class="text-gray-500 max-w-xl mx-auto mb-8">Curated, high-utility products designed to make your daily routine easier. Sourced globally, shipped locally.</p>
     </header>
 
-    <!-- Products Grid -->
     <main class="flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full">
         <h2 class="text-2xl font-bold mb-6 border-b pb-2">Trending Right Now</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="productGrid">
-            <!-- Products injected by JS -->
-        </div>
+            </div>
     </main>
 
-    <!-- Footer & Legal -->
     <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
         <div class="space-x-4 mb-4">
             <button onclick="toggleModal('legalModal')" class="hover:text-white underline">Terms & Conditions</button>
@@ -48,7 +43,6 @@
         <p>&copy; 2026 Nova SA Dropshipping. All Rights Reserved.</p>
     </footer>
 
-    <!-- Cart Modal -->
     <div id="cartModal" class="modal-hidden fixed inset-0 bg-black bg-opacity-50 z-50 justify-center items-center">
         <div class="bg-white p-6 rounded-lg w-full max-w-md mx-4 max-h-[90vh] flex flex-col shadow-2xl">
             <div class="flex justify-between items-center mb-4 border-b pb-2">
@@ -56,8 +50,7 @@
                 <button onclick="toggleModal('cartModal')" class="text-gray-500 hover:text-black font-bold text-xl">&times;</button>
             </div>
             <div id="cartItems" class="flex-grow overflow-y-auto mb-4 space-y-4">
-                <!-- Cart items injected by JS -->
-            </div>
+                </div>
             <div class="border-t pt-4">
                 <div class="flex justify-between font-bold text-lg mb-4">
                     <span>Total:</span>
@@ -71,7 +64,6 @@
         </div>
     </div>
 
-    <!-- Legal Compliances Modal (SA Law) -->
     <div id="legalModal" class="modal-hidden fixed inset-0 bg-black bg-opacity-50 z-50 justify-center items-center">
         <div class="bg-white p-6 rounded-lg w-full max-w-2xl mx-4 max-h-[80vh] overflow-y-auto shadow-2xl">
             <div class="flex justify-between items-center mb-4">
@@ -94,9 +86,16 @@
     <script>
         // --- 1. PRODUCT DATABASE ---
         const products = [
-            { id: 1, name: "Smart Foldable Electric Warming Tray", price: 599.00, img: "https://images.unsplash.com/photo-1556910103-1c02745a872f?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80", desc: "Keep food warm for hours. Rolls up for easy storage." },
-            { id: 2, name: "Magnetic Auto-Align Phone Mount", price: 249.00, img: "https://images.unsplash.com/photo-1542362567-b07e54358753?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80", desc: "Military-grade dashboard grip for seamless commuting." },
-            { id: 3, name: "Ultrasonic Silicone Face Cleanser", price: 199.00, img: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80", desc: "Spa-level daily skin exfoliation. Waterproof & rechargeable." }
+            { id: 1, name: "Smart Foldable Electric Warming Tray", price: 599.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Warming+Tray", desc: "Keep food warm for hours. Rolls up for easy storage." },
+            { id: 2, name: "Magnetic Auto-Align Phone Mount", price: 249.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Phone+Mount", desc: "Military-grade dashboard grip for seamless commuting." },
+            { id: 3, name: "Ultrasonic Silicone Face Cleanser", price: 199.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Face+Cleanser", desc: "Spa-level daily skin exfoliation. Waterproof & rechargeable." },
+            { id: 4, name: "Portable Solar Power Bank", price: 450.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Solar+Power+Bank", desc: "Heavy-duty dual USB solar charger. Essential for load shedding backups." },
+            { id: 5, name: "Anti-Theft Commuter Backpack", price: 389.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Anti-Theft+Backpack", desc: "Hidden zippers and slash-proof material. Perfect for trains and taxis." },
+            { id: 6, name: "Wireless LED Strip Lights", price: 175.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=LED+Strip+Lights", desc: "Motion-activated under-cabinet lighting. Stick-on installation anywhere." },
+            { id: 7, name: "Ergonomic Memory Foam Cushion", price: 299.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Memory+Foam+Cushion", desc: "Relieves lower back pain. Perfect for long drives or office desk setups." },
+            { id: 8, name: "Rechargeable Lint Remover", price: 149.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Lint+Remover", desc: "Restores old jerseys, jackets, and couches to brand new condition." },
+            { id: 9, name: "Smart Bluetooth Body Scale", price: 340.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Smart+Scale", desc: "Tracks BMI, muscle mass, and body fat percentage via a free mobile app." },
+            { id: 10, name: "Cordless Car Vacuum Cleaner", price: 275.00, img: "https://placehold.co/600x400/e2e8f0/1e293b?text=Car+Vacuum", desc: "High suction power in a compact size. Recharges via any USB port." }
         ];
 
         let cart = [];
@@ -104,6 +103,7 @@
         // --- 2. RENDER STORE ---
         function renderProducts() {
             const grid = document.getElementById('productGrid');
+            grid.innerHTML = ''; // Clear before rendering
             products.forEach(p => {
                 grid.innerHTML += `
                     <div class="bg-white rounded-lg shadow border p-4 flex flex-col hover:shadow-lg transition">
