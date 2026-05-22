@@ -3,179 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova SA | The Winter Shop</title>
+    <title>Nova SA | Debug Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .modal-hidden { display: none; }
-        .modal-active { display: flex; }
-        .winter-gradient { background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%); }
-    </style>
 </head>
-<body class="winter-gradient text-gray-900 font-sans flex flex-col min-h-screen">
-
-    <div class="bg-slate-800 text-blue-200 text-center text-xs py-2 uppercase tracking-widest font-bold">
-        ❄️ Winter Essentials: Stay Warm, Stay Connected.
-    </div>
-
-    <nav class="bg-white/80 backdrop-blur-md shadow-sm p-4 flex justify-between items-center sticky top-0 z-40">
-        <div class="text-2xl font-black tracking-tighter text-slate-900">NOVA<span class="text-orange-500">.</span></div>
-        <button onclick="toggleModal('cartModal')" class="relative bg-slate-900 text-white px-5 py-2 rounded-full shadow hover:bg-black transition font-bold text-sm">
-            Cart (<span id="cartCount">0</span>)
-        </button>
-    </nav>
-
-    <header class="py-20 px-4 text-center">
-        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-slate-900 tracking-tight">Warmth for the Cold.</h1>
-        <p class="text-lg text-slate-600 max-w-xl mx-auto">Curated gear to keep you cozy and powered up through the Cape winter.</p>
-    </header>
-
-    <main class="flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="productGrid"></div>
-    </main>
-
-    <div id="detailsModal" class="modal-hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-3xl w-full max-w-lg shadow-2xl border border-blue-50">
-            <h3 id="modalTitle" class="text-3xl font-extrabold mb-4 text-slate-900"></h3>
-            <p id="modalDesc" class="text-slate-600 mb-8 leading-relaxed"></p>
-            <div class="flex gap-4">
-                <button onclick="toggleModal('detailsModal')" class="flex-1 bg-slate-100 py-3 rounded-full font-bold hover:bg-slate-200 text-slate-700">Close</button>
-                <button id="modalAddBtn" class="flex-1 bg-orange-500 text-white py-3 rounded-full font-bold hover:bg-orange-600 shadow-lg shadow-orange-200">Add to Cart</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="cartModal" class="modal-hidden fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-3xl w-full max-w-md shadow-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold">Your Winter Kit</h3>
-                <button onclick="toggleModal('cartModal')" class="text-slate-400 font-bold text-2xl">&times;</button>
-            </div>
-            <div id="cartItems" class="space-y-4 mb-6"></div>
-            <div class="border-t border-slate-100 pt-6">
-                <div class="flex justify-between font-bold text-xl mb-6 text-slate-900">
-                    <span>Total:</span>
-                    <span id="cartTotal">R0.00</span>
-                </div>
-                <button onclick="checkoutToPayFast()" class="w-full bg-orange-500 text-white py-4 rounded-full font-bold hover:bg-orange-600 shadow-lg shadow-orange-200 transition">
-                    Secure Checkout
-                </button>
-            </div>
-        </div>
-    </div>
+<body class="bg-slate-50 text-gray-900 font-sans p-4">
+    <h1 class="text-xl font-bold mb-4">Diagnostics: Checking image paths...</h1>
+    <div id="productGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
 
     <script>
         const products = [
-            { id: 1, name: "Rechargeable Hot Water Bottle", price: 479.00, img: "1000503924.jpg", desc: "Plugs in for 10 mins, stays hot.", longDesc: "Ditch the kettle. Charges in minutes." },
-            { id: 2, name: "Wearable Fleece Hoodie (Unisex)", price: 599.00, img: "1000503928.jpg", desc: "One-size-fits-all plush warmth.", longDesc: "The ultimate couch companion." },
-            { id: 3, name: "Smart Foldable Warming Tray", price: 1499.00, img: "1000503939.jpg", desc: "Keep meals hot during winter.", longDesc: "Never let your dinner go cold." },
-            { id: 4, name: "Auto-Heated Commuter Gloves", price: 449.00, img: "1779490937682.jpeg", desc: "USB-powered warmth.", longDesc: "Essential gear for commutes." },
-            { id: 5, name: "Low-Wattage Mini Desktop Heater", price: 499.00, img: "1000504093.jpg", desc: "Inverter friendly desktop heat.", longDesc: "Compact desktop heater." },
-            { id: 6, name: "Portable Gas Heater Adapter", price: 899.00, img: "1000504096.jpg", desc: "Grid-free heat.", longDesc: "Turn camping gas into a heater." },
-            { id: 7, name: "Thermal Fleece-Lined Leggings", price: 699.00, img: "1000504099.jpg", desc: "Ultimate thermal comfort.", longDesc: "Thick thermal fleece layer." },
-            { id: 8, name: "Smart Temp Display Flask", price: 399.00, img: "1000504106.jpg", desc: "LED temp display.", longDesc: "Real-time temperature display." },
-            { id: 9, name: "Mini UPS for WiFi Router", price: 899.00, origPrice: 1199.00, img: "1000504112.jpg", desc: "8+ hours of internet.", longDesc: "Keep your WiFi router powered." },
-            { id: 10, name: "Motion Sensor LED Light", price: 249.00, origPrice: 349.00, img: "1000504115.jpg", desc: "Auto-light for mornings.", longDesc: "Auto-activate motion lights." }
+            { id: 1, name: "Hot Water Bottle", img: "1000503924.jpg" },
+            { id: 2, name: "Fleece Hoodie", img: "1000503928.jpg" },
+            { id: 3, name: "Warming Tray", img: "1000503939.jpg" },
+            { id: 4, name: "Commuter Gloves", img: "1779490937682.jpeg" },
+            { id: 5, name: "Desktop Heater", img: "1000504093.jpg" },
+            { id: 6, name: "Gas Heater Adapter", img: "1000504096.jpg" },
+            { id: 7, name: "Thermal Leggings", img: "1000504099.jpg" },
+            { id: 8, name: "Smart Flask", img: "1000504106.jpg" },
+            { id: 9, name: "WiFi UPS", img: "1000504112.jpg" },
+            { id: 10, name: "LED Light", img: "1000504115.jpg" }
         ];
 
-        // This function attempts to load the image from 3 different potential locations
-        function loadWithFallback(imgElement, filename) {
-            const paths = [`downloads/${filename}`, `Downloads/${filename}`, filename];
-            let index = 0;
-
-            imgElement.onerror = function() {
-                index++;
-                if (index < paths.length) {
-                    this.src = paths[index];
-                } else {
-                    console.error("Failed to load: " + filename);
-                }
-            };
-            imgElement.src = paths[0];
-        }
-
-        let cart = [];
-
-        function renderProducts() {
-            const grid = document.getElementById('productGrid');
-            products.forEach(p => {
-                let priceDisplay = `<span class="font-black text-2xl text-slate-900">R${p.price.toFixed(2)}</span>`;
-                if (p.origPrice) {
-                    priceDisplay = `
-                        <div class="flex flex-col">
-                            <span class="text-xs text-slate-400 line-through">R${p.origPrice.toFixed(2)}</span>
-                            <span class="font-black text-2xl text-orange-600">R${p.price.toFixed(2)}</span>
-                        </div>
-                    `;
-                }
-
-                grid.innerHTML += `
-                    <div class="bg-white rounded-3xl shadow-lg shadow-blue-50 border border-blue-50 p-5 flex flex-col hover:shadow-xl transition duration-300">
-                        <img id="img-${p.id}" src="" alt="${p.name}" class="w-full h-56 object-cover rounded-2xl mb-5 cursor-pointer bg-slate-50">
-                        <h3 class="font-bold text-xl mb-1 text-slate-900">${p.name}</h3>
-                        <p class="text-slate-500 text-sm mb-6 flex-grow">${p.desc}</p>
-                        <div class="flex items-center justify-between mt-auto">
-                            ${priceDisplay}
-                            <button onclick="showDetails(${p.id})" class="bg-slate-100 text-slate-900 px-5 py-2.5 rounded-full text-sm font-bold hover:bg-orange-100 transition">Details</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            // Trigger the loading logic for each image
-            products.forEach(p => {
-                loadWithFallback(document.getElementById(`img-${p.id}`), p.img);
-            });
-        }
-
-        function showDetails(id) {
-            const p = products.find(x => x.id === id);
-            document.getElementById('modalTitle').innerText = p.name;
-            document.getElementById('modalDesc').innerHTML = p.longDesc;
-            document.getElementById('modalAddBtn').onclick = () => { addToCart(p.id); toggleModal('detailsModal'); };
-            toggleModal('detailsModal');
-        }
-
-        function addToCart(id) {
-            const product = products.find(p => p.id === id);
-            cart.push({ ...product, qty: 1 });
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            document.getElementById('cartCount').innerText = cart.length;
-            const cartItems = document.getElementById('cartItems');
-            cartItems.innerHTML = cart.map((item, index) => `
-                <div class="flex justify-between items-center text-sm font-medium">
-                    <span>${item.name}</span>
-                    <span class="text-slate-900">R${item.price.toFixed(2)}</span>
+        const grid = document.getElementById('productGrid');
+        products.forEach(p => {
+            const path = `downloads/${p.img}`;
+            grid.innerHTML += `
+                <div class="bg-white p-4 rounded shadow border">
+                    <h2 class="font-bold">${p.name}</h2>
+                    <p class="text-xs text-red-600">Trying to load: <b>${path}</b></p>
+                    <img src="${path}" class="w-20 h-20 object-cover mt-2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <p class="text-xs text-red-500 hidden">Error loading image!</p>
                 </div>
-            `).join('');
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cartTotal').innerText = `R${total.toFixed(2)}`;
-        }
-
-        function toggleModal(id) {
-            document.getElementById(id).classList.toggle('modal-hidden');
-            document.getElementById(id).classList.toggle('modal-active');
-        }
-
-        function checkoutToPayFast() {
-            if (cart.length === 0) return alert("Your cart is empty!");
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const form = document.createElement("form");
-            form.action = "https://sandbox.payfast.co.za/eng/process"; 
-            form.method = "POST";
-            form.innerHTML = `
-                <input type="hidden" name="merchant_id" value="10000100">
-                <input type="hidden" name="merchant_key" value="46f0cd694581a">
-                <input type="hidden" name="amount" value="${total.toFixed(2)}">
-                <input type="hidden" name="item_name" value="Nova SA Order">
             `;
-            document.body.appendChild(form);
-            form.submit();
-        }
-
-        renderProducts();
+        });
     </script>
 </body>
 </html>
