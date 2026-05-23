@@ -64,20 +64,20 @@
     </div>
 
     <script>
+        // Exact filenames mapped to the products
         const products = [
-            { id: 1, name: "Rechargeable Hot Water Bottle", price: 479.00, img: "1000503924.jpg", desc: "Fast-heating, cord-free comfort.", longDesc: "Ditch the traditional kettle. This electric hot water bottle heats up in just 10 minutes and retains warmth for up to 4 hours. Safety-first design prevents leaks and scalding—the perfect bedside companion." },
-            { id: 2, name: "Wearable Fleece Hoodie (Unisex)", price: 599.00, img: "1000503928.jpg", desc: "One-size-fits-all plush warmth.", longDesc: "Experience the ultimate in couch-day luxury. This oversized hoodie features a premium, thick-pile fleece lining that traps body heat perfectly. The unisex, one-size-fits-all design makes it an effortless gift or a winter essential for everyone." },
-            { id: 3, name: "Smart Foldable Warming Tray", price: 1499.00, img: "1000503939.jpg", desc: "Restaurant-quality plate warmth.", longDesc: "Never let your meal turn cold again. This sleek, foldable warming tray is designed to keep your plates at the perfect serving temperature, allowing you to host dinners without the stress of cold food." },
-            { id: 4, name: "Auto-Heated Commuter Gloves", price: 449.00, img: "1779490937682.jpeg", desc: "Precision warmth for travel.", longDesc: "Designed specifically for early morning commuters and outdoor enthusiasts. These USB-powered gloves maintain core dexterity by delivering consistent, gentle heat directly to your fingers without the bulk of traditional gloves." },
-            { id: 5, name: "Low-Wattage Mini Desktop Heater", price: 499.00, img: "1000504093.jpg", desc: "Energy-efficient desk heating.", longDesc: "The ultimate solution for your home office during load shedding. This compact unit generates focused warmth with minimal power consumption, keeping you productive and comfortable without tripping your inverter." },
-            { id: 6, name: "Portable Gas Heater Adapter", price: 899.00, img: "1000504096.jpg", desc: "Grid-free emergency heat.", longDesc: "Transform your standard portable gas cylinder into a reliable emergency heater. Durable, easy to attach, and built for performance, it provides essential, grid-free warmth when the lights go out." },
-            { id: 7, name: "Thermal Fleece-Lined Leggings", price: 699.00, img: "1000504099.jpg", desc: "Style meets thermal protection.", longDesc: "Don't sacrifice your style for the cold. These leggings feature a hidden, ultra-soft fleece interior that feels like a blanket against your skin. Perfect for office wear or home relaxation." },
-            { id: 8, name: "Smart Temp Display Flask", price: 399.00, img: "1000504106.jpg", desc: "LED temp-monitored hydration.", longDesc: "Eliminate the risk of burnt tongues. This smart flask features a high-precision LED touch display on the lid that monitors the exact temperature of your beverage, keeping it perfect for up to 12 hours." },
-            { id: 9, name: "Mini UPS for WiFi Router", price: 899.00, origPrice: 1199.00, img: "1000504112.jpg", desc: "Non-stop connectivity.", longDesc: "The definitive solution for South African load shedding. This compact UPS ensures your WiFi router remains powered for hours, keeping you online for work, streaming, and communication during power outages." },
-            { id: 10, name: "Motion Sensor LED Light", price: 249.00, origPrice: 349.00, img: "1000504115.jpg", desc: "Smart ambient safety lighting.", longDesc: "Navigate your home safely in the dark without fumbling for switches. These magnetic, motion-activated lights are perfect for hallways, cupboards, or bedside areas—automatically lighting your path." }
+            { id: 1, name: "Rechargeable Hot Water Bottle", price: 479.00, img: "s-pdpxl.file (10).jpg", desc: "Fast-heating, cord-free comfort.", longDesc: "Ditch the traditional kettle. This electric hot water bottle heats up in just 10 minutes and retains warmth for up to 4 hours." },
+            { id: 2, name: "Wearable Fleece Hoodie (Unisex)", price: 599.00, img: "s-pdpxl.file (2).webp", desc: "One-size-fits-all plush warmth.", longDesc: "Experience the ultimate in couch-day luxury. This oversized hoodie features a premium, thick-pile fleece lining." },
+            { id: 3, name: "Smart Foldable Warming Tray", price: 1499.00, img: "s-pdpxl.file (4).jpg", desc: "Restaurant-quality plate warmth.", longDesc: "Never let your meal turn cold again. This sleek warming tray keeps plates at the perfect serving temperature." },
+            { id: 4, name: "Auto-Heated Commuter Gloves", price: 449.00, img: "s-pdpxl.file (8).jpg", desc: "Precision warmth for travel.", longDesc: "USB-powered gloves that maintain dexterity while delivering consistent heat to your fingers." },
+            { id: 5, name: "Low-Wattage Mini Desktop Heater", price: 499.00, img: "s-pdpxl.file.jpg", desc: "Energy-efficient desk heating.", longDesc: "The ultimate solution for your home office. Compact, focused warmth with minimal power consumption." },
+            { id: 6, name: "Portable Gas Heater Adapter", price: 899.00, img: "s-zoom.file (1).jpg", desc: "Grid-free emergency heat.", longDesc: "Transform your standard gas cylinder into a reliable emergency heater." },
+            { id: 7, name: "Thermal Fleece-Lined Leggings", price: 699.00, img: "s-zoom.file (14).jpg", desc: "Style meets thermal protection.", longDesc: "Features a hidden, ultra-soft fleece interior that feels like a blanket against your skin." },
+            { id: 8, name: "Smart Temp Display Flask", price: 399.00, img: "s-zoom.file (19).jpg", desc: "LED temp-monitored hydration.", longDesc: "High-precision LED touch display monitors beverage temp for up to 12 hours." },
+            { id: 9, name: "Mini UPS for WiFi Router", price: 899.00, origPrice: 1199.00, img: "s-zoom.file (5).jpg", desc: "Non-stop connectivity.", longDesc: "Ensures your WiFi router remains powered for hours during South African power outages." },
+            { id: 10, name: "Motion Sensor LED Light", price: 249.00, origPrice: 349.00, img: "s-zoom.file (9).jpg", desc: "Smart ambient safety lighting.", longDesc: "Magnetic, motion-activated lights perfect for hallways or bedside areas." }
         ];
 
-        // Renders the products directly
         const grid = document.getElementById('productGrid');
         products.forEach(p => {
             let priceDisplay = `<span class="font-black text-2xl text-slate-900">R${p.price.toFixed(2)}</span>`;
@@ -121,7 +121,16 @@
             document.getElementById('cartTotal').innerText = `R${total.toFixed(2)}`;
         }
 
-        function toggleModal(id) { document.getElementById(id).classList.toggle('modal-hidden'); document.getElementById(id).classList.toggle('modal-active'); }
+        function toggleModal(id) { 
+            const modal = document.getElementById(id);
+            if (modal.classList.contains('modal-hidden')) {
+                modal.classList.remove('modal-hidden');
+                modal.classList.add('modal-active');
+            } else {
+                modal.classList.remove('modal-active');
+                modal.classList.add('modal-hidden');
+            }
+        }
         function checkoutToPayFast() { alert("Redirecting to checkout..."); }
     </script>
 </body>
