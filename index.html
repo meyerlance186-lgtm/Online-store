@@ -8,7 +8,6 @@
     <style>
         .modal-hidden { display: none; }
         .modal-active { display: flex; }
-        /* Custom scrollbar for the thumbnail gallery */
         .thumb-scroll::-webkit-scrollbar { height: 6px; }
         .thumb-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
@@ -37,12 +36,10 @@
 
     <div id="detailsModal" class="modal-hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
         <div class="bg-white p-6 md:p-8 rounded-3xl w-full max-w-4xl shadow-2xl flex flex-col md:flex-row gap-8 max-h-[95vh] overflow-y-auto">
-            
             <div class="w-full md:w-1/2 flex flex-col gap-4">
                 <img id="mainModalImage" src="" class="w-full h-72 md:h-96 object-cover rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
                 <div id="modalThumbnails" class="flex gap-3 overflow-x-auto pb-2 thumb-scroll"></div>
             </div>
-
             <div class="w-full md:w-1/2 flex flex-col">
                 <h3 id="modalTitle" class="text-3xl font-extrabold mb-4 text-slate-900"></h3>
                 <p id="modalDesc" class="text-slate-600 mb-8 leading-relaxed flex-grow text-lg"></p>
@@ -51,7 +48,6 @@
                     <button id="modalAddBtn" class="flex-1 bg-orange-500 text-white py-4 rounded-full font-bold hover:bg-orange-600 shadow-lg shadow-orange-200 transition">Add to Cart</button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -75,139 +71,46 @@
     </div>
 
     <script>
-        // The images array now holds multiple files. 
-        // I have duplicated your primary image into the 2nd and 3rd slots to prevent 404 errors.
-        // Replace the duplicates with your new filenames once you upload them to GitHub.
         const products = [
-            { 
-                id: 1, 
-                name: "Rechargeable Hot Water Bottle", 
-                price: 479.00, 
-                images: ["s-pdpxl.file.jpg", "s-pdpxl.file.jpg", "s-pdpxl.file.jpg"], 
-                desc: "Fast-heating, cord-free comfort.", 
-                longDesc: "Ditch the traditional kettle. This electric hot water bottle heats up in just 10 minutes and retains warmth for up to 4 hours. Safety-first design prevents leaks and scalding—the perfect bedside companion." 
-            },
-            { 
-                id: 2, 
-                name: "Wearable Fleece Hoodie (Unisex)", 
-                price: 599.00, 
-                images: ["s-pdpxl.file (4).jpg", "s-pdpxl.file (4).jpg", "s-pdpxl.file (4).jpg"], 
-                desc: "One-size-fits-all plush warmth.", 
-                longDesc: "Experience the ultimate in couch-day luxury. This oversized hoodie features a premium, thick-pile fleece lining that traps body heat perfectly. The unisex, one-size-fits-all design makes it an effortless gift or a winter essential for everyone." 
-            },
-            { 
-                id: 3, 
-                name: "Smart Foldable Warming Tray", 
-                price: 1499.00, 
-                images: ["s-pdpxl.file (8).jpg", "s-pdpxl.file (8).jpg", "s-pdpxl.file (8).jpg"], 
-                desc: "Restaurant-quality plate warmth.", 
-                longDesc: "Never let your meal turn cold again. This sleek, foldable warming tray is designed to keep your plates at the perfect serving temperature, allowing you to host dinners without the stress of cold food." 
-            },
-            { 
-                id: 4, 
-                name: "Auto-Heated Commuter Gloves", 
-                price: 449.00, 
-                images: ["s-pdpxl.file (10).jpg", "s-pdpxl.file (10).jpg"], 
-                desc: "Precision warmth for travel.", 
-                longDesc: "Designed specifically for early morning commuters and outdoor enthusiasts. These USB-powered gloves maintain core dexterity by delivering consistent, gentle heat directly to your fingers without the bulk of traditional gloves." 
-            },
-            { 
-                id: 5, 
-                name: "Low-Wattage Mini Desktop Heater", 
-                price: 499.00, 
-                images: ["s-pdpxl.file (2).webp", "s-pdpxl.file (2).webp"], 
-                desc: "Energy-efficient desk heating.", 
-                longDesc: "The ultimate solution for your home office during load shedding. This compact unit generates focused warmth with minimal power consumption, keeping you productive and comfortable without tripping your inverter." 
-            },
-            { 
-                id: 6, 
-                name: "Portable Gas Heater Adapter", 
-                price: 899.00, 
-                images: ["s-zoom.file (1).jpg", "s-zoom.file (1).jpg"], 
-                desc: "Grid-free emergency heat.", 
-                longDesc: "Transform your standard portable gas cylinder into a reliable emergency heater. Durable, easy to attach, and built for performance, it provides essential, grid-free warmth when the lights go out." 
-            },
-            { 
-                id: 7, 
-                name: "Thermal Fleece-Lined Leggings", 
-                price: 699.00, 
-                images: ["s-zoom.file (5).jpg", "s-zoom.file (5).jpg"], 
-                desc: "Style meets thermal protection.", 
-                longDesc: "Don't sacrifice your style for the cold. These leggings feature a hidden, ultra-soft fleece interior that feels like a blanket against your skin. Perfect for office wear or home relaxation." 
-            },
-            { 
-                id: 8, 
-                name: "Smart Temp Display Flask", 
-                price: 399.00, 
-                images: ["s-zoom.file (9).jpg", "s-zoom.file (9).jpg"], 
-                desc: "LED temp-monitored hydration.", 
-                longDesc: "Eliminate the risk of burnt tongues. This smart flask features a high-precision LED touch display on the lid that monitors the exact temperature of your beverage, keeping it perfect for up to 12 hours." 
-            },
-            { 
-                id: 9, 
-                name: "Mini UPS for WiFi Router", 
-                price: 899.00, 
-                origPrice: 1199.00, 
-                images: ["s-zoom.file (14).jpg", "s-zoom.file (14).jpg"], 
-                desc: "Non-stop connectivity.", 
-                longDesc: "The definitive solution for South African load shedding. This compact UPS ensures your WiFi router remains powered for hours, keeping you online for work, streaming, and communication during power outages." 
-            },
-            { 
-                id: 10, 
-                name: "Motion Sensor LED Light", 
-                price: 249.00, 
-                origPrice: 349.00, 
-                images: ["s-zoom.file (19).jpg", "s-zoom.file (19).jpg"], 
-                desc: "Smart ambient safety lighting.", 
-                longDesc: "Navigate your home safely in the dark without fumbling for switches. These magnetic, motion-activated lights are perfect for hallways, cupboards, or bedside areas—automatically lighting your path." 
-            }
+            { id: 1, name: "Rechargeable Hot Water Bottle", price: 479.00, images: ["s-pdpxl.file (1) (1).jpg", "s-pdpxl.file.webp"], desc: "Fast-heating, cord-free comfort.", longDesc: "Ditch the traditional kettle. This electric hot water bottle heats up in just 10 minutes and retains warmth for up to 4 hours." },
+            { id: 2, name: "Office Heater", price: 499.00, images: ["s-pdpxl.file (1).jpg", "s-pdpxl.file (13).jpg", "s-pdpxl.file.jpg"], desc: "Energy-efficient desk heating.", longDesc: "Compact, focused warmth with minimal power consumption—the ultimate solution for your home office." },
+            { id: 3, name: "Fleece Hoodie", price: 599.00, images: ["s-pdpxl.file (1).webp", "s-pdpxl.file (3).jpg", "s-pdpxl.file (5).jpg"], desc: "One-size-fits-all plush warmth.", longDesc: "Experience the ultimate in couch-day luxury with premium, thick-pile fleece lining." },
+            { id: 4, name: "Auto-Heated Commuter Gloves", price: 449.00, images: ["s-pdpxl.file (11).jpg", "s-pdpxl.file (12).jpg"], desc: "Precision warmth for travel.", longDesc: "USB-powered gloves that maintain dexterity while delivering consistent heat." },
+            { id: 5, name: "Portable Gas Heater Adapter", price: 899.00, images: ["s-pdpxl.file (14).jpg", "s-zoom.file.jpg"], desc: "Grid-free emergency heat.", longDesc: "Transform your standard gas cylinder into a reliable emergency heater." },
+            { id: 6, name: "Smart Foldable Warming Tray", price: 1499.00, images: ["s-pdpxl.file (7).jpg", "s-pdpxl.file (9).jpg"], desc: "Restaurant-quality plate warmth.", longDesc: "Keep your plates at the perfect serving temperature." },
+            { id: 7, name: "Smart Temp Display Flask", price: 399.00, images: ["s-zoom.file (10).jpg", "s-zoom.file (12).jpg"], desc: "LED temp-monitored hydration.", longDesc: "High-precision LED touch display monitors temperature for up to 12 hours." },
+            { id: 8, name: "Mini UPS for WiFi Router", price: 899.00, images: ["s-zoom.file (15).jpg", "s-zoom.file.webp"], desc: "Non-stop connectivity.", longDesc: "Ensures your WiFi router remains powered for hours during outages." },
+            { id: 9, name: "Motion Sensor LED Light", price: 249.00, images: ["s-zoom.file (16).jpg", "s-zoom.file (18).jpg"], desc: "Smart ambient safety lighting.", longDesc: "Magnetic, motion-activated lights perfect for hallways or bedside areas." },
+            { id: 10, name: "Thermal Fleece-Lined Leggings", price: 699.00, images: ["s-zoom.file (6).jpg", "s-zoom.file (7).jpg"], desc: "Style meets thermal protection.", longDesc: "Features a hidden, ultra-soft fleece interior that feels like a blanket." }
         ];
 
         const grid = document.getElementById('productGrid');
         products.forEach(p => {
-            let priceDisplay = `<span class="font-black text-2xl text-slate-900">R${p.price.toFixed(2)}</span>`;
-            if (p.origPrice) {
-                priceDisplay = `<div class="flex flex-col"><span class="text-xs text-slate-400 line-through">R${p.origPrice.toFixed(2)}</span><span class="font-black text-2xl text-orange-600">R${p.price.toFixed(2)}</span></div>`;
-            }
-
-            // The grid uses the first image in the array as the main cover photo
             grid.innerHTML += `
                 <div class="bg-white rounded-3xl shadow-sm hover:shadow-xl border border-slate-100 p-5 flex flex-col transition duration-300">
                     <img onclick="showDetails(${p.id})" src="${p.images[0]}" alt="${p.name}" class="w-full h-56 object-cover rounded-2xl mb-5 bg-[#f9f8f6] cursor-pointer">
                     <h3 class="font-bold text-xl mb-1 text-slate-900">${p.name}</h3>
                     <p class="text-slate-500 text-sm mb-6 flex-grow">${p.desc}</p>
                     <div class="flex items-center justify-between mt-auto">
-                        ${priceDisplay}
+                        <span class="font-black text-2xl text-slate-900">R${p.price.toFixed(2)}</span>
                         <button onclick="showDetails(${p.id})" class="bg-[#f9f8f6] text-slate-900 px-5 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition">Details</button>
                     </div>
                 </div>
             `;
         });
 
-        // Updates the main image in the modal when a thumbnail is clicked
-        function setMainImage(src) {
-            document.getElementById('mainModalImage').src = src;
-        }
+        function setMainImage(src) { document.getElementById('mainModalImage').src = src; }
 
         function showDetails(id) {
             const p = products.find(x => x.id === id);
-            
-            // Set Text
             document.getElementById('modalTitle').innerText = p.name;
             document.getElementById('modalDesc').innerText = p.longDesc;
-            
-            // Set Default Main Image
             document.getElementById('mainModalImage').src = p.images[0];
-            
-            // Generate Thumbnails
             const thumbContainer = document.getElementById('modalThumbnails');
             thumbContainer.innerHTML = p.images.map(imgSrc => `
                 <img onclick="setMainImage('${imgSrc}')" src="${imgSrc}" class="w-20 h-20 object-cover rounded-xl cursor-pointer border-2 border-transparent hover:border-orange-500 transition shadow-sm bg-slate-50 flex-shrink-0">
             `).join('');
-
-            // Set Add to Cart Action
             document.getElementById('modalAddBtn').onclick = () => { addToCart(p.id); toggleModal('detailsModal'); };
-            
             toggleModal('detailsModal');
         }
 
@@ -221,48 +124,15 @@
         function updateCartUI() {
             document.getElementById('cartCount').innerText = cart.length;
             const items = document.getElementById('cartItems');
-            
-            if (cart.length === 0) {
-                items.innerHTML = '<p class="text-slate-500 text-center py-4">Your cart is empty.</p>';
-            } else {
-                items.innerHTML = cart.map((item, index) => `
-                    <div class="flex justify-between items-center py-3 border-b border-slate-100 last:border-0">
-                        <span class="font-medium text-slate-700">${item.name}</span>
-                        <span class="font-bold text-slate-900">R${item.price.toFixed(2)}</span>
-                    </div>
-                `).join('');
-            }
-            
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('cartTotal').innerText = `R${total.toFixed(2)}`;
+            items.innerHTML = cart.length === 0 ? '<p class="text-slate-500 text-center py-4">Your cart is empty.</p>' : cart.map(i => `<div class="flex justify-between py-2 border-b"><span>${i.name}</span><span class="font-bold">R${i.price}</span></div>`).join('');
+            document.getElementById('cartTotal').innerText = `R${cart.reduce((sum, i) => sum + i.price, 0).toFixed(2)}`;
         }
 
         function toggleModal(id) { 
-            const modal = document.getElementById(id);
-            if (modal.classList.contains('modal-hidden')) {
-                modal.classList.remove('modal-hidden');
-                modal.classList.add('modal-active');
-            } else {
-                modal.classList.remove('modal-active');
-                modal.classList.add('modal-hidden');
-            }
+            const m = document.getElementById(id);
+            m.classList.toggle('modal-hidden'); m.classList.toggle('modal-active');
         }
-
-        function checkoutToPayFast() { 
-            if (cart.length === 0) return alert("Your cart is empty!");
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const form = document.createElement("form");
-            form.action = "https://sandbox.payfast.co.za/eng/process"; 
-            form.method = "POST";
-            form.innerHTML = `
-                <input type="hidden" name="merchant_id" value="10000100">
-                <input type="hidden" name="merchant_key" value="46f0cd694581a">
-                <input type="hidden" name="amount" value="${total.toFixed(2)}">
-                <input type="hidden" name="item_name" value="Nova SA Order">
-            `;
-            document.body.appendChild(form);
-            form.submit();
-        }
+        function checkoutToPayFast() { alert("Redirecting to checkout..."); }
     </script>
 </body>
 </html>
