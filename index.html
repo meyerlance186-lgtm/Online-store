@@ -3,192 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova SA | The Winter Shop</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Nova SA | Winter Comfort & Efficiency</title>
     <style>
-        .modal-hidden { display: none; }
-        .modal-active { display: flex; }
-        .thumb-scroll::-webkit-scrollbar { height: 6px; }
-        .thumb-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; text-align: center; }
+        .product-card { border: 1px solid #ddd; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        button { background-color: #007bff; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
     </style>
 </head>
-<body class="bg-[#f9f8f6] text-gray-900 font-sans flex flex-col min-h-screen">
+<body>
 
-    <div class="bg-slate-800 text-blue-200 text-center text-xs py-2 uppercase tracking-widest font-bold">
-        ❄️ Winter Essentials: Stay Warm, Stay Connected.
-    </div>
-
-    <nav class="bg-[#f9f8f6]/90 backdrop-blur-md shadow-sm p-4 flex justify-between items-center sticky top-0 z-40 border-b border-slate-200/50">
-        <div class="text-2xl font-black tracking-tighter text-slate-900">NOVA<span class="text-orange-500">.</span></div>
-        <button onclick="toggleModal('cartModal')" class="relative bg-slate-900 text-white px-5 py-2 rounded-full shadow hover:bg-black transition font-bold text-sm">
-            Cart (<span id="cartCount">0</span>)
-        </button>
-    </nav>
-
-    <header class="py-20 px-4 text-center">
-        <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-slate-900 tracking-tight">Warmth for the Cold.</h1>
-        <p class="text-lg text-slate-600 max-w-xl mx-auto">Curated gear to keep you cozy and powered up through the South African winter. Fast, reliable delivery.</p>
+    <header>
+        <h1>Welcome to Nova SA</h1>
+        <p>Premium Winter Comfort & Efficient Living</p>
     </header>
 
-    <main class="flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="productGrid"></div>
+    <main>
+        <div class="product-card">
+            <h2>Winter Comfort Bundle</h2>
+            <p>Stay warm and efficient this season.</p>
+            <p><strong>Price: R 499.00</strong></p>
+
+            <form action="https://www.payfast.co.za/eng/process" method="post">
+                <input type="hidden" name="merchant_id" value="16368982">
+                <input type="hidden" name="merchant_key" value="ibsbxenxdgy4r">
+                
+                <input type="hidden" name="amount" value="499.00">
+                <input type="hidden" name="item_name" value="Winter Comfort Bundle">
+                
+                <input type="hidden" name="return_url" value="https://novasastore.co.za/success">
+                <input type="hidden" name="cancel_url" value="https://novasastore.co.za/cancel">
+                
+                <button type="submit">Pay Now with PayFast</button>
+            </form>
+        </div>
     </main>
 
-    <div id="detailsModal" class="modal-hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
-        <div class="bg-white p-6 md:p-8 rounded-3xl w-full max-w-4xl shadow-2xl flex flex-col md:flex-row gap-8 max-h-[95vh] overflow-y-auto">
-            <div class="w-full md:w-1/2 flex flex-col gap-4">
-                <img id="mainModalImage" src="" class="w-full h-72 md:h-96 object-cover rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
-                <div id="modalThumbnails" class="flex gap-3 overflow-x-auto pb-2 thumb-scroll"></div>
-            </div>
-            <div class="w-full md:w-1/2 flex flex-col">
-                <h3 id="modalTitle" class="text-3xl font-extrabold mb-4 text-slate-900"></h3>
-                <p id="modalDesc" class="text-slate-600 mb-6 leading-relaxed text-lg"></p>
-                <div class="mt-auto pt-6 border-t border-slate-100">
-                    <div id="sizeGuideBtnContainer" class="mb-4 hidden">
-                        <button onclick="toggleSizeGuide()" class="text-orange-600 font-bold underline text-sm">View Size Guide</button>
-                    </div>
-                    <table class="w-full text-sm text-slate-600 mb-6">
-                        <tr class="border-b"><td class="py-2 font-medium">Weight</td><td id="specWeight" class="py-2 text-right">--</td></tr>
-                        <tr class="border-b"><td class="py-2 font-medium">Dimensions</td><td id="specDims" class="py-2 text-right">--</td></tr>
-                    </table>
-                    <div class="flex gap-4">
-                        <button onclick="toggleModal('detailsModal')" class="flex-1 bg-slate-100 py-4 rounded-full font-bold hover:bg-slate-200 text-slate-700 transition">Close</button>
-                        <button id="modalAddBtn" class="flex-1 bg-orange-500 text-white py-4 rounded-full font-bold hover:bg-orange-600 shadow-lg shadow-orange-200 transition">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="sizeGuideModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-2xl max-w-sm w-full">
-            <h3 class="font-bold text-xl mb-4">Size Guide</h3>
-            <table class="w-full text-sm mb-6">
-                <tr class="bg-slate-50"><th class="p-2 text-left">Size</th><th class="p-2 text-left">Details</th></tr>
-                <tr><td class="p-2 border-b">S/M</td><td class="p-2 border-b">Standard Fit</td></tr>
-                <tr><td class="p-2 border-b">L/XL</td><td class="p-2 border-b">Generous Fit</td></tr>
-                <tr><td class="p-2 border-b">2XL</td><td class="p-2 border-b">Extra Comfort</td></tr>
-            </table>
-            <button onclick="toggleSizeGuide()" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold">Close</button>
-        </div>
-    </div>
-
-    <div id="termsModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full max-h-[80vh] overflow-y-auto">
-            <h3 class="font-bold text-2xl mb-4">Terms & Conditions</h3>
-            <p class="text-sm text-slate-600 leading-relaxed mb-4">By purchasing from Nova SA, you agree to our terms. Prices include VAT where applicable. All orders are subject to stock availability and payment verification.</p>
-            <button onclick="toggleModal('termsModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold">Close</button>
-        </div>
-    </div>
-
-    <div id="returnModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full max-h-[80vh] overflow-y-auto">
-            <h3 class="font-bold text-2xl mb-4">Return Policy</h3>
-            <p class="text-sm text-slate-600 leading-relaxed mb-4">We accept returns within 7 days of delivery if the item is unused and in original packaging. Please contact us to initiate a return. Shipping costs for returns are for the customer's account.</p>
-            <button onclick="toggleModal('returnModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold">Close</button>
-        </div>
-    </div>
-
-    <div id="cartModal" class="modal-hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-3xl w-full max-w-md shadow-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold">Your Winter Kit</h3>
-                <button onclick="toggleModal('cartModal')" class="text-slate-400 font-bold text-2xl hover:text-slate-900 transition">&times;</button>
-            </div>
-            <div id="cartItems" class="space-y-4 mb-6 max-h-60 overflow-y-auto"></div>
-            <div class="border-t border-slate-100 pt-6">
-                <div class="flex justify-between font-bold text-xl mb-6 text-slate-900">
-                    <span>Total:</span>
-                    <span id="cartTotal">R0.00</span>
-                </div>
-                <button onclick="checkoutToPayFast()" class="w-full bg-orange-500 text-white py-4 rounded-full font-bold hover:bg-orange-600 shadow-lg shadow-orange-200 transition">
-                    Secure Checkout
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="bg-white py-12 border-t border-slate-100 mt-12">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <div class="flex justify-center gap-8 mb-8 text-sm font-bold text-slate-600">
-                <button onclick="toggleModal('termsModal')" class="hover:text-orange-500 transition">Terms & Conditions</button>
-                <button onclick="toggleModal('returnModal')" class="hover:text-orange-500 transition">Return Policy</button>
-            </div>
-            <p class="text-slate-400 text-xs uppercase tracking-widest">&copy; 2026 Nova SA. All rights reserved.</p>
-        </div>
+    <footer>
+        <p>&copy; 2026 Nova SA. All rights reserved.</p>
     </footer>
 
-    <script>
-        const products = [
-            { id: 1, name: "Rechargeable Hot Water Bottle", price: 479.00, images: ["s-pdpxl.file (1) (1).jpg", "s-pdpxl.file.webp"], weight: "1.2kg", dims: "22cm x 15cm", longDesc: "Ditch the traditional kettle. This electric hot water bottle heats up in just 10 minutes and retains warmth for up to 4 hours. Safety-first design prevents leaks and scalding—the perfect bedside companion for those chilly Cape Town nights." },
-            { id: 2, name: "Office Heater", price: 499.00, images: ["s-pdpxl.file (1).jpg", "s-pdpxl.file (13).jpg", "s-pdpxl.file.jpg"], weight: "0.8kg", dims: "15cm x 15cm", longDesc: "The ultimate solution for your home office during load shedding. This compact unit generates focused warmth with minimal power consumption, keeping you productive and comfortable without tripping your inverter. It features silent operation and built-in overheat protection." },
-            { id: 3, name: "Fleece Hoodie", price: 599.00, images: ["s-pdpxl.file (1).webp", "s-pdpxl.file (3).jpg", "s-pdpxl.file (5).jpg"], weight: "0.5kg", dims: "S/M/L/XL/2XL", hasSize: true, longDesc: "Experience the ultimate in couch-day luxury. This oversized hoodie features a premium, thick-pile fleece lining that traps body heat perfectly. The unisex, expansive design makes it an effortless gift or a winter essential for everyone, available up to 2XL." },
-            { id: 4, name: "Auto-Heated Commuter Gloves", price: 449.00, images: ["s-pdpxl.file (11).jpg", "s-pdpxl.file (12).jpg"], weight: "0.3kg", dims: "Adjustable", longDesc: "Designed specifically for early morning commuters and outdoor enthusiasts. These USB-powered gloves maintain core dexterity by delivering consistent, gentle heat directly to your fingers without the bulk of traditional gloves. Featuring touchscreen-compatible fingertips." },
-            { id: 5, name: "Portable Gas Heater Adapter", price: 899.00, images: ["s-pdpxl.file (14).jpg", "s-zoom.file.jpg"], weight: "1.5kg", dims: "Standard Fit", longDesc: "Transform your standard portable gas cylinder into a reliable emergency heater. Durable, easy to attach, and built for performance, it provides essential, grid-free warmth when the lights go out. A must-have for every South African household." },
-            { id: 6, name: "Smart Foldable Warming Tray", price: 1499.00, images: ["s-pdpxl.file (7).jpg", "s-pdpxl.file (9).jpg"], weight: "2.5kg", dims: "60cm x 40cm", longDesc: "Never let your meal turn cold again. This sleek, foldable warming tray is designed to keep your plates at the perfect serving temperature, allowing you to host dinners without the stress of cold food. It folds flat for easy storage in small kitchens." },
-            { id: 7, name: "Smart Temp Display Flask", price: 399.00, images: ["s-zoom.file (10).jpg", "s-zoom.file (12).jpg"], weight: "0.4kg", dims: "500ml Capacity", longDesc: "Eliminate the risk of burnt tongues. This smart flask features a high-precision LED touch display on the lid that monitors the exact temperature of your beverage, keeping it perfect for up to 12 hours. Sleek, leak-proof, and BPA-free." },
-            { id: 8, name: "Mini UPS for WiFi Router", price: 899.00, images: ["s-zoom.file (15).jpg", "s-zoom.file.webp"], weight: "0.6kg", dims: "10cm x 10cm", longDesc: "The definitive solution for South African load shedding. This compact UPS ensures your WiFi router remains powered for hours, keeping you online for work, streaming, and communication during power outages. Simple plug-and-play installation." },
-            { id: 9, name: "Motion Sensor LED Light", price: 249.00, images: ["s-zoom.file (16).jpg", "s-zoom.file (18).jpg"], weight: "0.2kg", dims: "10cm x 3cm", longDesc: "Navigate your home safely in the dark without fumbling for switches. These magnetic, motion-activated lights are perfect for hallways, cupboards, or bedside areas—automatically lighting your path. USB-rechargeable with 30-day battery life." },
-            { id: 10, name: "Thermal Fleece-Lined Leggings", price: 699.00, images: ["s-zoom.file (6).jpg", "s-zoom.file (7).jpg"], weight: "0.3kg", dims: "S/M/L/XL/2XL", hasSize: true, longDesc: "Don't sacrifice your style for the cold. These leggings feature a hidden, ultra-soft fleece interior that feels like a blanket against your skin. Perfect for office wear or home relaxation. Stretchy, breathable, and now available in inclusive sizing up to 2XL." }
-        ];
-
-        const grid = document.getElementById('productGrid');
-        products.forEach(p => {
-            grid.innerHTML += `
-                <div class="bg-white rounded-3xl shadow-sm hover:shadow-xl border border-slate-100 p-5 flex flex-col transition duration-300">
-                    <img onclick="showDetails(${p.id})" src="${p.images[0]}" alt="${p.name}" class="w-full h-56 object-cover rounded-2xl mb-5 bg-[#f9f8f6] cursor-pointer">
-                    <h3 class="font-bold text-xl mb-1 text-slate-900">${p.name}</h3>
-                    <p class="text-slate-500 text-sm mb-6 flex-grow">R${p.price.toFixed(2)}</p>
-                    <button onclick="showDetails(${p.id})" class="bg-[#f9f8f6] text-slate-900 px-5 py-2.5 rounded-full text-sm font-bold hover:bg-slate-200 transition">View Details</button>
-                </div>
-            `;
-        });
-
-        function showDetails(id) {
-            const p = products.find(x => x.id === id);
-            document.getElementById('modalTitle').innerText = p.name;
-            document.getElementById('modalDesc').innerText = p.longDesc;
-            document.getElementById('specWeight').innerText = p.weight;
-            document.getElementById('specDims').innerText = p.dims;
-            document.getElementById('mainModalImage').src = p.images[0];
-            document.getElementById('modalThumbnails').innerHTML = p.images.map(img => `<img onclick="document.getElementById('mainModalImage').src='${img}'" src="${img}" class="w-20 h-20 object-cover rounded-xl cursor-pointer border-2 border-transparent hover:border-orange-500 shadow-sm bg-slate-50">`).join('');
-            document.getElementById('sizeGuideBtnContainer').className = p.hasSize ? "mb-4 block" : "mb-4 hidden";
-            document.getElementById('modalAddBtn').onclick = () => { addToCart(p.id); toggleModal('detailsModal'); };
-            toggleModal('detailsModal');
-        }
-
-        let cart = [];
-        function addToCart(id) {
-            const p = products.find(x => x.id === id);
-            cart.push(p);
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            document.getElementById('cartCount').innerText = cart.length;
-            const items = document.getElementById('cartItems');
-            items.innerHTML = cart.length === 0 ? '<p>Your cart is empty.</p>' : cart.map(i => `<div class="flex justify-between py-2 border-b"><span>${i.name}</span><span class="font-bold">R${i.price}</span></div>`).join('');
-            document.getElementById('cartTotal').innerText = `R${cart.reduce((sum, i) => sum + i.price, 0).toFixed(2)}`;
-        }
-
-        function toggleModal(id) { document.getElementById(id).classList.toggle('modal-hidden'); document.getElementById(id).classList.toggle('modal-active'); }
-        function toggleSizeGuide() { toggleModal('sizeGuideModal'); }
-        
-        function checkoutToPayFast() { 
-            const total = cart.reduce((sum, i) => sum + i.price, 0);
-            if (total === 0) return alert("Your cart is empty!");
-            const form = document.createElement("form");
-            form.action = "https://www.payfast.co.za/eng/process"; 
-            form.method = "POST";
-            form.innerHTML = `
-                <input type="hidden" name="merchant_id" value="YOUR_MERCHANT_ID_HERE">
-                <input type="hidden" name="merchant_key" value="YOUR_MERCHANT_KEY_HERE">
-                <input type="hidden" name="amount" value="${total.toFixed(2)}">
-                <input type="hidden" name="item_name" value="Nova SA Order">
-            `;
-            document.body.appendChild(form);
-            form.submit();
-        }
-    </script>
 </body>
 </html>
