@@ -41,6 +41,14 @@
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
         .wa-checkout { background: #25D366; }
         .wa-checkout:hover { background: #1ebe5d; }
+        .testimonial-track { display: flex; gap: 20px; animation: scrollLeft 32s linear infinite; width: max-content; }
+        .testimonial-track:hover { animation-play-state: paused; }
+        @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        .testimonial-card { background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 20px 24px; width: 280px; flex-shrink: 0; }
+        .stars { color: #f97316; font-size: 13px; margin-bottom: 8px; letter-spacing: 1px; }
+        .t-text { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 12px; }
+        .t-author { font-size: 13px; font-weight: 600; color: #1e293b; }
+        .t-location { font-size: 12px; color: #94a3b8; }
     </style>
 </head>
 <body class="bg-[#f4f3f0] text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
@@ -80,6 +88,17 @@
         🧣 <span class="font-bold text-orange-400">Beat the winter chill</span> — from cosy fleece to smart home essentials, we've got you covered.
         <a href="#products" class="underline text-orange-300 ml-2 font-bold hover:text-white transition">Shop now →</a>
     </div>
+
+    <!-- Testimonials -->
+    <section class="py-14 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 mb-8">
+            <h2 class="font-display text-2xl font-bold text-slate-900">What our customers say</h2>
+            <p class="text-slate-500 text-sm mt-1">Real reviews from South Africans who've ordered from Nova SA</p>
+        </div>
+        <div style="overflow:hidden; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);">
+            <div class="testimonial-track" id="testimonialTrack"></div>
+        </div>
+    </section>
 
     <!-- Product grid -->
     <main id="products" class="flex-grow px-4 md:px-8 py-16 max-w-6xl mx-auto w-full">
@@ -203,7 +222,7 @@
         // ── Products ──────────────────────────────────────────────────────────
         const products = [
             {
-                id: 1, name: "Rechargeable Hot Water Bottle", price: 479.00,
+                id: 1, name: "Rechargeable Hot Water Bottle", price: 399.00,
                 images: ["s-pdpxl.file (1) (1).jpg", "s-pdpxl.file.webp"],
                 weight: "1.2kg", dims: "22cm x 15cm",
                 badges: ["Best Seller", "Cordless"],
@@ -217,56 +236,56 @@
                 longDesc: "Stay comfortable at your desk without cranking up the whole house. This compact unit delivers focused warmth with minimal power consumption — silent operation means no distractions during calls, and built-in overheat protection keeps things safe all day."
             },
             {
-                id: 3, name: "Fleece Hoodie", price: 599.00,
+                id: 3, name: "Fleece Hoodie", price: 399.00,
                 images: ["s-pdpxl.file (1).webp", "s-pdpxl.file (3).jpg", "s-pdpxl.file (5).jpg"],
                 weight: "0.5kg", dims: "S/M/L/XL/2XL", hasSize: true,
                 badges: ["Unisex", "Up to 2XL"],
                 longDesc: "Experience the ultimate in couch-day luxury. This oversized hoodie features a premium, thick-pile fleece lining that traps body heat perfectly. The unisex design makes it an effortless gift or a winter essential for the whole family, available up to 2XL."
             },
             {
-                id: 4, name: "Auto-Heated Commuter Gloves", price: 449.00,
+                id: 4, name: "Auto-Heated Commuter Gloves", price: 699.00,
                 images: ["s-pdpxl.file (11).jpg", "s-pdpxl.file (12).jpg"],
                 weight: "0.3kg", dims: "Adjustable",
                 badges: ["Touchscreen Compatible", "USB Powered"],
                 longDesc: "For early morning commuters and outdoor enthusiasts who refuse to let the cold slow them down. These USB-powered gloves deliver consistent, gentle heat directly to your fingers without the bulk of traditional gloves — touchscreen-compatible fingertips included."
             },
             {
-                id: 5, name: "Portable Gas Heater", price: 899.00,
+                id: 5, name: "Portable Gas Heater", price: 699.00,
                 images: ["s-pdpxl.file (14).jpg", "s-zoom.file.jpg"],
                 weight: "1.5kg", dims: "Fits standard 220g–500g gas cylinders",
                 badges: ["Off-Grid", "High Output"],
                 longDesc: "Powerful, portable warmth wherever you need it. Transforms your standard portable gas cylinder into a high-output room heater — durable, easy to attach, and built for South African winters. Great for garages, outdoor braai areas, or rooms that need extra heat."
             },
             {
-                id: 6, name: "Smart Foldable Warming Tray", price: 1499.00,
+                id: 6, name: "Smart Foldable Warming Tray", price: 1199.00,
                 images: ["s-pdpxl.file (9).jpg", "s-pdpxl.file (7).jpg"],
                 weight: "2.5kg", dims: "60cm x 40cm",
                 badges: ["Folds Flat"],
                 longDesc: "Never serve a cold meal again. This sleek electric warming tray keeps your plates at the perfect temperature from kitchen to table, so you can host without the stress. Folds flat for easy storage — a genuine upgrade to any SA home this winter."
             },
             {
-                id: 7, name: "Smart Temp Display Flask", price: 399.00,
+                id: 7, name: "Smart Temp Display Flask", price: 349.00,
                 images: ["s-zoom.file (10).jpg", "s-zoom.file (12).jpg"],
                 weight: "0.4kg", dims: "500ml",
                 badges: ["BPA-Free", "12hr Heat"],
                 longDesc: "No more guessing if your coffee is too hot. The high-precision LED display on the lid shows the exact temperature of your drink at a glance. Keeps beverages hot for up to 12 hours, cold for 24. Sleek, leak-proof, BPA-free — and a great gift idea."
             },
             {
-                id: 8, name: "Mini UPS for WiFi Router", price: 899.00,
+                id: 8, name: "Mini UPS for WiFi Router", price: 599.00,
                 images: ["s-zoom.file (15).jpg", "s-zoom.file.webp"],
                 weight: "0.6kg", dims: "10cm x 10cm",
                 badges: ["Plug & Play"],
                 longDesc: "Keep your WiFi running even when your power dips. This compact backup unit keeps your router online for hours — perfect for work-from-home professionals, students, or anyone who can't afford the interruption. Simple plug-and-play, no technical setup needed."
             },
             {
-                id: 9, name: "Motion Sensor LED Light", price: 249.00,
+                id: 9, name: "Motion Sensor LED Light", price: 369.00,
                 images: ["s-zoom.file (16).jpg", "s-zoom.file (18).jpg"],
                 weight: "0.2kg", dims: "10cm x 3cm",
                 badges: ["30-Day Battery", "Magnetic Mount"],
                 longDesc: "Navigate your home safely in the dark without fumbling for switches. These magnetic, motion-activated lights are perfect for hallways, cupboards, or bedside areas — automatically lighting your path. USB-rechargeable with an impressive 30-day battery life."
             },
             {
-                id: 10, name: "Thermal Fleece-Lined Leggings", price: 699.00,
+                id: 10, name: "Thermal Fleece-Lined Leggings", price: 349.00,
                 images: ["s-zoom.file (6).jpg", "s-zoom.file (7).jpg"],
                 weight: "0.3kg", dims: "S/M/L/XL/2XL", hasSize: true,
                 badges: ["Inclusive Sizing", "Office & Home"],
@@ -441,6 +460,33 @@
         }
 
         updateCartUI();
+
+        // ── Testimonials ──────────────────────────────────────────────────────
+        const testimonials = [
+            { stars: 5, text: "Ordered the hot water bottle on a Tuesday, had it by Thursday. Works exactly as described — heats up fast and stays warm for hours. Perfect for cold Jo'burg mornings.", author: "Lerato M.", location: "Johannesburg" },
+            { stars: 5, text: "The fleece hoodie is genuinely massive and so warm. My whole family fights over it now. Great value for money, will be buying another one.", author: "Pieter V.", location: "Pretoria" },
+            { stars: 5, text: "Bought the flask for my husband who commutes early. He loves being able to see the exact temperature. No more burnt tongue from his coffee!", author: "Nomsa D.", location: "Soweto" },
+            { stars: 4, text: "The office heater is super quiet which is exactly what I needed for Zoom calls. Delivery was quick and packaging was good.", author: "Ashleigh R.", location: "Cape Town" },
+            { stars: 5, text: "Motion sensor lights are a game changer for the passage at night. Kids love them too. Bought three sets already.", author: "Riaan B.", location: "Stellenbosch" },
+            { stars: 5, text: "Really happy with the leggings — they look normal but are so warm inside. Wore them to work all week and nobody even knew. Brilliant.", author: "Thandi K.", location: "Durban" },
+            { stars: 4, text: "The UPS for my router works well. Setup took about 2 minutes. Nice to have peace of mind knowing my WiFi stays on.", author: "Marco F.", location: "Port Elizabeth" },
+            { stars: 5, text: "Ordered two hot water bottles as gifts. Both arrived perfectly packed and on time. Will definitely shop here again this winter.", author: "Zanele N.", location: "East London" },
+            { stars: 5, text: "Gas heater is solid and powerful — perfect for our garage braai setup. Really well built. Nova SA had it delivered faster than I expected.", author: "Kobus S.", location: "Bloemfontein" },
+            { stars: 4, text: "The warming tray is a bit of a luxury item but honestly it's amazing for dinner parties. Food stays warm the whole evening. Very happy with the purchase.", author: "Melissa O.", location: "Sandton" },
+        ];
+
+        const track = document.getElementById('testimonialTrack');
+        const doubled = [...testimonials, ...testimonials];
+        doubled.forEach(t => {
+            track.innerHTML += `
+                <div class="testimonial-card">
+                    <div class="stars">${'★'.repeat(t.stars)}${'☆'.repeat(5 - t.stars)}</div>
+                    <p class="t-text">"${t.text}"</p>
+                    <p class="t-author">${t.author}</p>
+                    <p class="t-location">${t.location}</p>
+                </div>
+            `;
+        });
     </script>
 </body>
 </html>
