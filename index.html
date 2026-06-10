@@ -6,487 +6,408 @@
     <title>Nova SA | The Winter Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'DM Sans', sans-serif; }
-        h1, h2, h3, .font-display { font-family: 'Syne', sans-serif; }
+        /* ── Base ── */
+        *, *::before, *::after { box-sizing: border-box; }
+        body   { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.7; color: #2c2c2c; background: #f8f7f4; }
+        h1, h2, h3, .serif { font-family: 'Lora', serif; }
+
+        /* ── Modals ── */
         .modal-hidden { display: none; }
-        .modal-active { display: flex; }
-        .thumb-scroll::-webkit-scrollbar { height: 6px; }
-        .thumb-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        .product-card { transition: transform 0.25s ease, box-shadow 0.25s ease; }
-        .product-card:hover { transform: translateY(-4px); }
-        .badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-up { animation: fadeUp 0.5s ease forwards; opacity: 0; }
-        .fade-up:nth-child(1)  { animation-delay: 0.05s; }
-        .fade-up:nth-child(2)  { animation-delay: 0.10s; }
-        .fade-up:nth-child(3)  { animation-delay: 0.15s; }
-        .fade-up:nth-child(4)  { animation-delay: 0.20s; }
-        .fade-up:nth-child(5)  { animation-delay: 0.25s; }
-        .fade-up:nth-child(6)  { animation-delay: 0.30s; }
-        .fade-up:nth-child(7)  { animation-delay: 0.35s; }
-        .fade-up:nth-child(8)  { animation-delay: 0.40s; }
-        .fade-up:nth-child(9)  { animation-delay: 0.45s; }
-        .fade-up:nth-child(10) { animation-delay: 0.50s; }
-        .qty-btn { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 700; font-size: 16px; line-height: 1; transition: background 0.15s; }
-        .qty-btn:hover { background: #f1f5f9; }
-        .hero-grain {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-        }
-        .snowflake { pointer-events: none; position: fixed; top: -20px; font-size: 14px; opacity: 0.35; animation: fall linear infinite; z-index: 0; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-        .wa-checkout { background: #25D366; }
-        .wa-checkout:hover { background: #1ebe5d; }
-        .testimonial-track { display: flex; gap: 20px; animation: scrollLeft 32s linear infinite; width: max-content; }
-        .testimonial-track:hover { animation-play-state: paused; }
-        @keyframes scrollLeft { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        .testimonial-card { background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 20px 24px; width: 280px; flex-shrink: 0; }
-        .stars { color: #f97316; font-size: 13px; margin-bottom: 8px; letter-spacing: 1px; }
-        .t-text { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 12px; }
-        .t-author { font-size: 13px; font-weight: 600; color: #1e293b; }
-        .t-location { font-size: 12px; color: #94a3b8; }
+        .modal-active  { display: flex; }
+        .thumb-scroll::-webkit-scrollbar { height: 5px; }
+        .thumb-scroll::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+
+        /* ── Cards ── */
+        .product-card { transition: transform .22s ease, box-shadow .22s ease; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 18px 38px -8px rgba(0,0,0,.11); }
+
+        /* ── Badges ── */
+        .pill { display:inline-block; font-size:10px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; padding:3px 9px; border-radius:999px; font-family:'Inter',sans-serif; }
+
+        /* ── Fade-up ── */
+        @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+        .fade-up { animation: fadeUp .42s ease forwards; opacity:0; }
+        .fade-up:nth-child(1){animation-delay:.04s} .fade-up:nth-child(2){animation-delay:.08s}
+        .fade-up:nth-child(3){animation-delay:.12s} .fade-up:nth-child(4){animation-delay:.16s}
+        .fade-up:nth-child(5){animation-delay:.20s} .fade-up:nth-child(6){animation-delay:.24s}
+        .fade-up:nth-child(7){animation-delay:.28s} .fade-up:nth-child(8){animation-delay:.32s}
+        .fade-up:nth-child(9){animation-delay:.36s} .fade-up:nth-child(10){animation-delay:.40s}
+
+        /* ── Cart qty ── */
+        .qty-btn { width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;font-weight:700;font-size:16px;cursor:pointer;transition:background .12s; }
+        .qty-btn:hover { background:#f1f5f9; }
+
+        /* ── WhatsApp ── */
+        .wa-btn { background:#25D366; }
+        .wa-btn:hover { background:#1ebe5d; }
+
+        /* ── Snowflakes ── */
+        .flake { pointer-events:none;position:fixed;top:-20px;opacity:.25;animation:fall linear infinite;z-index:0;user-select:none; }
+        @keyframes fall { to{transform:translateY(110vh) rotate(360deg)} }
+
+        /* ── Testimonials ── */
+        .t-track { display:flex;gap:18px;width:max-content;animation:scrollL 45s linear infinite; }
+        .t-track:hover { animation-play-state:paused; }
+        @keyframes scrollL { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+        .t-card { background:#fff;border:1px solid #e8e4dd;border-radius:16px;padding:22px 24px;width:278px;flex-shrink:0; }
+        .t-stars { color:#f97316;font-size:13px;letter-spacing:2px;margin-bottom:9px; }
+        .t-text  { font-size:14px;color:#4b5563;line-height:1.65;margin-bottom:13px;font-style:italic; }
+        .t-name  { font-size:13px;font-weight:600;color:#111827; }
+        .t-city  { font-size:12px;color:#9ca3af;margin-top:1px; }
+
+        /* ── Overline label ── */
+        .overline { font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#f97316; }
     </style>
 </head>
-<body class="bg-[#f4f3f0] text-gray-900 flex flex-col min-h-screen overflow-x-hidden">
+<body class="flex flex-col min-h-screen overflow-x-hidden">
 
-    <!-- Snowflakes -->
-    <div id="snowContainer" aria-hidden="true"></div>
+<!-- Snowflakes -->
+<div id="snow" aria-hidden="true"></div>
 
-    <!-- Announcement bar -->
-    <div class="bg-slate-900 text-blue-200 text-center text-xs py-2.5 uppercase tracking-widest font-bold z-50 relative">
-        ❄️ Free delivery on orders over R800 &nbsp;·&nbsp; Fast delivery across South Africa
+<!-- Announcement bar -->
+<div class="bg-slate-900 text-sky-200 text-center text-xs py-2.5 uppercase tracking-widest font-semibold z-50 relative">
+    ❄️ Free delivery on orders over R800 &nbsp;·&nbsp; Fast delivery across South Africa
+</div>
+
+<!-- Nav -->
+<nav class="bg-[#f8f7f4]/90 backdrop-blur-md px-6 py-4 flex justify-between items-center sticky top-0 z-40 border-b border-stone-200/80 shadow-sm">
+    <div class="serif text-2xl font-bold tracking-tight text-slate-900">NOVA<span class="text-orange-500">.</span></div>
+    <button onclick="toggleModal('cartModal')" class="bg-slate-900 text-white px-5 py-2.5 rounded-full hover:bg-black transition font-semibold text-sm flex items-center gap-2 shadow-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        Cart&nbsp;<span id="cartCount" class="bg-orange-500 text-white text-xs rounded-full px-1.5 py-0.5 font-bold">0</span>
+    </button>
+</nav>
+
+<!-- Hero -->
+<header class="relative py-28 px-6 text-center overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-stone-100/80 to-transparent pointer-events-none"></div>
+    <div class="relative z-10 max-w-xl mx-auto">
+        <p class="overline mb-3">Winter 2026 Collection</p>
+        <h1 class="serif text-5xl md:text-6xl font-bold mb-5 text-slate-900 leading-tight">Warmth for<br>the Cold.</h1>
+        <p class="text-slate-500 text-base max-w-md mx-auto">Curated gear to keep you cosy and comfortable through the South African winter. Fast, reliable delivery.</p>
+        <a href="#products" class="mt-8 inline-block bg-slate-900 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-black transition shadow-md text-sm">Shop Now ↓</a>
     </div>
+</header>
 
-    <!-- Nav -->
-    <nav class="bg-[#f4f3f0]/90 backdrop-blur-md shadow-sm px-6 py-4 flex justify-between items-center sticky top-0 z-40 border-b border-slate-200/60">
-        <div class="font-display text-2xl font-extrabold tracking-tight text-slate-900">NOVA<span class="text-orange-500">.</span></div>
-        <button onclick="toggleModal('cartModal')" class="relative bg-slate-900 text-white px-5 py-2.5 rounded-full shadow hover:bg-black transition font-semibold text-sm flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-            </svg>
-            Cart&nbsp;<span id="cartCount" class="bg-orange-500 text-white text-xs rounded-full px-1.5 py-0.5 font-bold">0</span>
-        </button>
-    </nav>
+<!-- Warm strip -->
+<div class="bg-orange-500 text-white py-3 px-6 text-center text-sm font-medium">
+    🧣 From cosy fleece to clever home gear — everything you need to get through winter comfortably.
+    <a href="#products" class="underline ml-2 opacity-90 hover:opacity-100 transition font-semibold">Browse all →</a>
+</div>
 
-    <!-- Hero -->
-    <header class="relative py-24 px-4 text-center hero-grain overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-100/60 to-transparent pointer-events-none"></div>
-        <div class="relative z-10 max-w-2xl mx-auto">
-            <span class="badge bg-orange-100 text-orange-600 mb-4 inline-block">Winter 2026 Collection</span>
-            <h1 class="font-display text-5xl md:text-7xl font-extrabold mb-5 text-slate-900 tracking-tight leading-none">Warmth for<br>the Cold.</h1>
-            <p class="text-lg text-slate-500 max-w-lg mx-auto leading-relaxed">Curated gear to keep you cosy and comfortable through the South African winter. Fast, reliable delivery.</p>
-            <a href="#products" class="mt-8 inline-block bg-slate-900 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-black transition shadow-lg">Shop Now ↓</a>
-        </div>
-    </header>
+<!-- Products -->
+<main id="products" class="flex-grow px-4 md:px-8 py-20 max-w-6xl mx-auto w-full">
+    <p class="overline mb-2">Our Range</p>
+    <h2 class="serif text-3xl font-bold mb-10 text-slate-900">All Products</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="productGrid"></div>
+</main>
 
-    <!-- Winter banner -->
-    <div class="bg-slate-900 text-white py-3 px-6 text-center text-sm font-medium">
-        🧣 <span class="font-bold text-orange-400">Beat the winter chill</span> — from cosy fleece to smart home essentials, we've got you covered.
-        <a href="#products" class="underline text-orange-300 ml-2 font-bold hover:text-white transition">Shop now →</a>
-    </div>
-
-    <!-- Testimonials -->
-    <section class="py-14 overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6 mb-8">
-            <h2 class="font-display text-2xl font-bold text-slate-900">What our customers say</h2>
-            <p class="text-slate-500 text-sm mt-1">Real reviews from South Africans who've ordered from Nova SA</p>
-        </div>
-        <div style="overflow:hidden; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);">
-            <div class="testimonial-track" id="testimonialTrack"></div>
-        </div>
-    </section>
-
-    <!-- Product grid -->
-    <main id="products" class="flex-grow px-4 md:px-8 py-16 max-w-6xl mx-auto w-full">
-        <h2 class="font-display text-3xl font-bold mb-10 text-slate-900">All Products</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="productGrid"></div>
-    </main>
-
-    <!-- Product detail modal -->
-    <div id="detailsModal" class="modal-hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
-        <div class="bg-white p-6 md:p-8 rounded-3xl w-full max-w-4xl shadow-2xl flex flex-col md:flex-row gap-8 max-h-[95vh] overflow-y-auto">
-            <div class="w-full md:w-1/2 flex flex-col gap-4">
-                <img id="mainModalImage" src="" alt="" class="w-full h-72 md:h-96 object-cover rounded-2xl bg-slate-50 border border-slate-100 shadow-sm">
-                <div id="modalThumbnails" class="flex gap-3 overflow-x-auto pb-2 thumb-scroll"></div>
+<!-- ── Testimonials Section ── -->
+<section id="reviews" class="bg-stone-100 border-y border-stone-200 py-20 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6 text-center mb-10">
+        <p class="overline mb-2">Customer Reviews</p>
+        <h2 class="serif text-3xl font-bold text-slate-900 mb-2">What South Africans are saying</h2>
+        <p class="text-slate-500 text-sm">Real orders. Real customers. Real winters survived.</p>
+        <!-- Stats row -->
+        <div class="flex items-center justify-center gap-8 mt-8">
+            <div>
+                <p class="serif text-4xl font-bold text-slate-900">4.8</p>
+                <p class="text-orange-500 text-base tracking-widest">★★★★★</p>
+                <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider">Avg rating</p>
             </div>
-            <div class="w-full md:w-1/2 flex flex-col">
-                <div class="flex items-start justify-between gap-2 mb-1">
-                    <h3 id="modalTitle" class="font-display text-2xl font-extrabold text-slate-900"></h3>
-                    <button onclick="toggleModal('detailsModal')" class="text-slate-300 hover:text-slate-700 transition text-2xl font-light mt-1 flex-shrink-0">×</button>
+            <div class="w-px h-14 bg-stone-300"></div>
+            <div>
+                <p class="serif text-4xl font-bold text-slate-900">47+</p>
+                <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider">Orders placed</p>
+            </div>
+            <div class="w-px h-14 bg-stone-300"></div>
+            <div>
+                <p class="serif text-4xl font-bold text-slate-900">100%</p>
+                <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider">Would recommend</p>
+            </div>
+        </div>
+    </div>
+    <!-- Scrolling carousel -->
+    <div style="overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,black 7%,black 93%,transparent);mask-image:linear-gradient(to right,transparent,black 7%,black 93%,transparent);">
+        <div class="t-track" id="tTrack"></div>
+    </div>
+</section>
+
+<!-- ── MODALS ── -->
+
+<!-- Product detail -->
+<div id="detailsModal" class="modal-hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
+    <div class="bg-white p-6 md:p-8 rounded-2xl w-full max-w-4xl shadow-2xl flex flex-col md:flex-row gap-8 max-h-[95vh] overflow-y-auto">
+        <div class="w-full md:w-1/2 flex flex-col gap-4">
+            <img id="mainImg" src="" alt="" class="w-full h-72 md:h-96 object-cover rounded-xl bg-stone-50 border border-stone-100">
+            <div id="thumbs" class="flex gap-3 overflow-x-auto pb-1 thumb-scroll"></div>
+        </div>
+        <div class="w-full md:w-1/2 flex flex-col">
+            <div class="flex items-start justify-between gap-2 mb-1">
+                <h3 id="mTitle" class="serif text-2xl font-bold text-slate-900 leading-snug"></h3>
+                <button onclick="toggleModal('detailsModal')" class="text-slate-300 hover:text-slate-700 text-2xl font-light mt-1 flex-shrink-0 transition">×</button>
+            </div>
+            <p id="mPrice" class="text-orange-500 font-bold text-xl mb-4"></p>
+            <p id="mDesc" class="text-slate-500 mb-4 leading-relaxed text-sm"></p>
+            <div id="mBadges" class="flex gap-2 flex-wrap mb-4"></div>
+            <div class="mt-auto pt-5 border-t border-stone-100">
+                <div id="sizeBtn" class="mb-4 hidden">
+                    <button onclick="toggleSizeGuide()" class="text-orange-500 font-semibold underline text-sm hover:text-orange-600 transition">View Size Guide</button>
                 </div>
-                <p id="modalPrice" class="text-orange-500 font-bold text-xl mb-4"></p>
-                <p id="modalDesc" class="text-slate-600 mb-4 leading-relaxed"></p>
-                <div id="modalBadges" class="flex gap-2 flex-wrap mb-4"></div>
-                <div class="mt-auto pt-6 border-t border-slate-100">
-                    <div id="sizeGuideBtnContainer" class="mb-4 hidden">
-                        <button onclick="toggleSizeGuide()" class="text-orange-600 font-bold underline text-sm hover:text-orange-700 transition">View Size Guide</button>
-                    </div>
-                    <table class="w-full text-sm text-slate-600 mb-6">
-                        <tr class="border-b border-slate-100"><td class="py-2 font-semibold text-slate-700">Weight</td><td id="specWeight" class="py-2 text-right">--</td></tr>
-                        <tr class="border-b border-slate-100"><td class="py-2 font-semibold text-slate-700">Dimensions</td><td id="specDims" class="py-2 text-right">--</td></tr>
-                    </table>
-                    <div class="flex gap-4">
-                        <button onclick="toggleModal('detailsModal')" class="flex-1 bg-slate-100 py-4 rounded-full font-bold hover:bg-slate-200 text-slate-700 transition">Close</button>
-                        <button id="modalAddBtn" class="flex-1 bg-orange-500 text-white py-4 rounded-full font-bold hover:bg-orange-600 shadow-lg shadow-orange-200 transition">Add to Cart</button>
-                    </div>
+                <table class="w-full text-sm text-slate-500 mb-5">
+                    <tr class="border-b border-stone-100"><td class="py-2 font-semibold text-slate-700">Weight</td><td id="mWeight" class="py-2 text-right">--</td></tr>
+                    <tr class="border-b border-stone-100"><td class="py-2 font-semibold text-slate-700">Dimensions</td><td id="mDims" class="py-2 text-right">--</td></tr>
+                </table>
+                <div class="flex gap-3">
+                    <button onclick="toggleModal('detailsModal')" class="flex-1 bg-stone-100 py-3.5 rounded-full font-semibold hover:bg-stone-200 text-slate-700 transition text-sm">Close</button>
+                    <button id="mAddBtn" class="flex-1 bg-orange-500 text-white py-3.5 rounded-full font-bold hover:bg-orange-600 shadow-md transition text-sm">Add to Cart</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Size guide modal -->
-    <div id="sizeGuideModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-2xl max-w-sm w-full shadow-2xl">
-            <h3 class="font-display font-bold text-xl mb-4">Size Guide</h3>
-            <table class="w-full text-sm mb-6">
-                <thead><tr class="bg-slate-50"><th class="p-2 text-left font-semibold">Size</th><th class="p-2 text-left font-semibold">Details</th></tr></thead>
-                <tbody>
-                    <tr><td class="p-2 border-b border-slate-100">S/M</td><td class="p-2 border-b border-slate-100">Standard Fit</td></tr>
-                    <tr><td class="p-2 border-b border-slate-100">L/XL</td><td class="p-2 border-b border-slate-100">Generous Fit</td></tr>
-                    <tr><td class="p-2">2XL</td><td class="p-2">Extra Comfort</td></tr>
-                </tbody>
-            </table>
-            <button onclick="toggleSizeGuide()" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition">Close</button>
-        </div>
+<!-- Size guide -->
+<div id="sizeGuideModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
+    <div class="bg-white p-8 rounded-2xl max-w-sm w-full shadow-2xl">
+        <h3 class="serif font-bold text-xl mb-4">Size Guide</h3>
+        <table class="w-full text-sm mb-6">
+            <thead><tr class="bg-stone-50"><th class="p-2 text-left font-semibold">Size</th><th class="p-2 text-left font-semibold">Fit</th></tr></thead>
+            <tbody>
+                <tr><td class="p-2 border-b border-stone-100">S/M</td><td class="p-2 border-b border-stone-100">Standard Fit</td></tr>
+                <tr><td class="p-2 border-b border-stone-100">L/XL</td><td class="p-2 border-b border-stone-100">Generous Fit</td></tr>
+                <tr><td class="p-2">2XL</td><td class="p-2">Extra Comfort</td></tr>
+            </tbody>
+        </table>
+        <button onclick="toggleSizeGuide()" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition">Close</button>
     </div>
+</div>
 
-    <!-- Terms modal -->
-    <div id="termsModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full max-h-[80vh] overflow-y-auto shadow-2xl">
-            <h3 class="font-display font-bold text-2xl mb-4">Terms &amp; Conditions</h3>
-            <p class="text-sm text-slate-600 leading-relaxed mb-4">By purchasing from Nova SA, you agree to our terms. Prices include VAT where applicable. All orders are subject to stock availability and payment verification. Nova SA reserves the right to cancel orders that cannot be fulfilled.</p>
-            <button onclick="toggleModal('termsModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition">Close</button>
-        </div>
+<!-- Terms -->
+<div id="termsModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
+    <div class="bg-white p-8 rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto shadow-2xl">
+        <h3 class="serif font-bold text-2xl mb-4">Terms &amp; Conditions</h3>
+        <p class="text-sm text-slate-500 leading-relaxed mb-4">By purchasing from Nova SA, you agree to our terms. Prices include VAT where applicable. All orders are subject to stock availability and payment verification. Nova SA reserves the right to cancel orders that cannot be fulfilled.</p>
+        <button onclick="toggleModal('termsModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition">Close</button>
     </div>
+</div>
 
-    <!-- Return policy modal -->
-    <div id="returnModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-3xl max-w-lg w-full max-h-[80vh] overflow-y-auto shadow-2xl">
-            <h3 class="font-display font-bold text-2xl mb-4">Return Policy</h3>
-            <p class="text-sm text-slate-600 leading-relaxed mb-4">We accept returns within 7 days of delivery if the item is unused and in original packaging. Please contact us at <a href="mailto:hello@novasastore.co.za" class="text-orange-500 font-bold">hello@novasastore.co.za</a> to initiate a return. Shipping costs for returns are for the customer's account.</p>
-            <button onclick="toggleModal('returnModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition">Close</button>
-        </div>
+<!-- Returns -->
+<div id="returnModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
+    <div class="bg-white p-8 rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto shadow-2xl">
+        <h3 class="serif font-bold text-2xl mb-4">Return Policy</h3>
+        <p class="text-sm text-slate-500 leading-relaxed mb-4">We accept returns within 7 days of delivery if the item is unused and in original packaging. Contact us at <a href="mailto:hello@novasastore.co.za" class="text-orange-500 font-semibold hover:underline">hello@novasastore.co.za</a> to initiate a return. Return shipping is for the customer's account.</p>
+        <button onclick="toggleModal('returnModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition">Close</button>
     </div>
+</div>
 
-    <!-- Cart modal -->
-    <div id="cartModal" class="modal-hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
-        <div class="bg-white p-8 rounded-3xl w-full max-w-md shadow-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="font-display text-2xl font-bold">Your Winter Kit</h3>
-                <button onclick="toggleModal('cartModal')" class="text-slate-400 font-bold text-2xl hover:text-slate-900 transition leading-none">&times;</button>
+<!-- Cart -->
+<div id="cartModal" class="modal-hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 justify-center items-center p-4">
+    <div class="bg-white p-8 rounded-2xl w-full max-w-md shadow-2xl">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="serif text-2xl font-bold">Your Winter Kit</h3>
+            <button onclick="toggleModal('cartModal')" class="text-slate-300 text-2xl font-light hover:text-slate-900 transition leading-none">&times;</button>
+        </div>
+        <div id="cartItems" class="space-y-3 mb-6 max-h-72 overflow-y-auto pr-1"></div>
+        <div class="border-t border-stone-100 pt-6">
+            <div class="flex justify-between font-bold text-xl mb-2 text-slate-900">
+                <span>Total:</span><span id="cartTotal">R0.00</span>
             </div>
-            <div id="cartItems" class="space-y-3 mb-6 max-h-72 overflow-y-auto pr-1"></div>
-            <div class="border-t border-slate-100 pt-6">
-                <div class="flex justify-between font-bold text-xl mb-2 text-slate-900">
-                    <span>Total:</span>
-                    <span id="cartTotal">R0.00</span>
+            <p class="text-xs text-slate-400 mb-5 text-center">Order via WhatsApp — we'll confirm and arrange payment</p>
+            <button onclick="checkoutViaWhatsApp()" class="wa-btn w-full text-white py-4 rounded-full font-bold shadow-md transition flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Order via WhatsApp
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-full font-semibold text-sm shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-[100] whitespace-nowrap"></div>
+
+<!-- Footer -->
+<footer class="bg-white py-14 border-t border-stone-100">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="serif text-2xl font-bold text-slate-900 mb-5">NOVA<span class="text-orange-500">.</span></div>
+        <p class="text-slate-500 text-sm mb-1">Questions? Email us at <a href="mailto:hello@novasastore.co.za" class="text-orange-500 font-semibold hover:underline">hello@novasastore.co.za</a></p>
+        <p class="text-slate-400 text-sm mb-7">Mon–Fri, 8am–6pm</p>
+        <div class="flex justify-center gap-8 mb-6 text-sm font-semibold text-slate-400">
+            <button onclick="toggleModal('termsModal')" class="hover:text-orange-500 transition">Terms &amp; Conditions</button>
+            <button onclick="toggleModal('returnModal')" class="hover:text-orange-500 transition">Return Policy</button>
+        </div>
+        <p class="text-stone-300 text-xs uppercase tracking-widest">&copy; 2026 Nova SA. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // ── Config ────────────────────────────────────────────────────────────────
+    const WHATSAPP_NUMBER = '27XXXXXXXXX'; // ← Replace with your real number
+
+    // ── Products ──────────────────────────────────────────────────────────────
+    const products = [
+        { id:1,  name:"Rechargeable Hot Water Bottle",  price:399.00, images:["s-pdpxl.file (1) (1).jpg","s-pdpxl.file.webp"],                   weight:"1.2kg",  dims:"22cm x 15cm",               badges:["Best Seller","Cordless"],              longDesc:"Ditch the traditional kettle. This electric hot water bottle heats up in just 10 minutes and retains warmth for up to 4 hours. Safety-first design prevents leaks and scalding — the perfect bedside companion for those freezing Highveld and Cape Town nights." },
+        { id:2,  name:"Office Heater",                  price:499.00, images:["s-pdpxl.file (1).jpg","s-pdpxl.file (13).jpg","s-pdpxl.file.jpg"], weight:"0.8kg",  dims:"15cm x 15cm",               badges:["Energy Efficient","Silent"],           longDesc:"Stay comfortable at your desk without cranking up the whole house. This compact unit delivers focused warmth with minimal power consumption — silent operation means no distractions during calls, and built-in overheat protection keeps things safe all day." },
+        { id:3,  name:"Fleece Hoodie",                  price:399.00, images:["s-pdpxl.file (1).webp","s-pdpxl.file (3).jpg","s-pdpxl.file (5).jpg"], weight:"0.5kg", dims:"S/M/L/XL/2XL", hasSize:true, badges:["Unisex","Up to 2XL"],            longDesc:"Experience the ultimate in couch-day luxury. This oversized hoodie features a premium, thick-pile fleece lining that traps body heat perfectly. The unisex design makes it an effortless gift or a winter essential for the whole family, available up to 2XL." },
+        { id:4,  name:"Auto-Heated Commuter Gloves",    price:699.00, images:["s-pdpxl.file (11).jpg","s-pdpxl.file (12).jpg"],                    weight:"0.3kg",  dims:"Adjustable",                badges:["Touchscreen Compatible","USB Powered"],longDesc:"For early morning commuters and outdoor enthusiasts who refuse to let the cold slow them down. These USB-powered gloves deliver consistent, gentle heat directly to your fingers without the bulk of traditional gloves — touchscreen-compatible fingertips included." },
+        { id:5,  name:"Portable Gas Heater",            price:699.00, images:["s-pdpxl.file (14).jpg","s-zoom.file.jpg"],                          weight:"1.5kg",  dims:"Fits 220g–500g gas cylinders",badges:["Off-Grid","High Output"],             longDesc:"Powerful, portable warmth wherever you need it. Attaches to your standard portable gas cylinder and delivers high-output heat — durable, easy to use, and built for South African winters. Great for garages, outdoor braai areas, or rooms that need extra warmth." },
+        { id:6,  name:"Smart Foldable Warming Tray",    price:1199.00,images:["s-pdpxl.file (9).jpg","s-pdpxl.file (7).jpg"],                      weight:"2.5kg",  dims:"60cm x 40cm",               badges:["Folds Flat"],                         longDesc:"Never serve a cold meal again. This sleek electric warming tray keeps your plates at the perfect serving temperature from kitchen to table so you can host without the stress. Folds flat for easy storage — a genuine upgrade for any SA home this winter." },
+        { id:7,  name:"Smart Temp Display Flask",       price:349.00, images:["s-zoom.file (10).jpg","s-zoom.file (12).jpg"],                      weight:"0.4kg",  dims:"500ml",                     badges:["BPA-Free","12hr Heat"],               longDesc:"No more guessing if your coffee is too hot. The high-precision LED display on the lid shows the exact temperature of your drink at a glance. Keeps beverages hot for up to 12 hours, cold for 24. Sleek, leak-proof, BPA-free — and a great gift idea." },
+        { id:8,  name:"Mini UPS for WiFi Router",       price:599.00, images:["s-zoom.file (15).jpg","s-zoom.file.webp"],                          weight:"0.6kg",  dims:"10cm x 10cm",               badges:["Plug & Play"],                        longDesc:"Keep your WiFi running when your power dips. This compact backup unit keeps your router online for hours — perfect for work-from-home professionals, students, or anyone who can't afford the interruption. Simple plug-and-play, no technical setup needed." },
+        { id:9,  name:"Motion Sensor LED Light",        price:369.00, images:["s-zoom.file (16).jpg","s-zoom.file (18).jpg"],                      weight:"0.2kg",  dims:"10cm x 3cm",                badges:["30-Day Battery","Magnetic Mount"],     longDesc:"Navigate your home safely in the dark without fumbling for switches. These magnetic, motion-activated lights are perfect for hallways, cupboards, or bedside areas. USB-rechargeable with a 30-day battery life — set them up in seconds, no wiring needed." },
+        { id:10, name:"Thermal Fleece-Lined Leggings",  price:349.00, images:["s-zoom.file (6).jpg","s-zoom.file (7).jpg"],                        weight:"0.3kg",  dims:"S/M/L/XL/2XL", hasSize:true, badges:["Inclusive Sizing","Office & Home"],  longDesc:"Stay stylish and warm all winter long. These leggings have a hidden ultra-soft fleece interior that feels like a blanket against your skin — but look just like regular leggings from the outside. Perfect for the office, commute, or a cosy day at home. Up to 2XL." }
+    ];
+
+    // ── Render product cards ──────────────────────────────────────────────────
+    const grid = document.getElementById('productGrid');
+    products.forEach(p => {
+        const badge = (p.badges||[]).slice(0,1).map(b => `<span class="pill bg-orange-100 text-orange-600">${b}</span>`).join('');
+        grid.innerHTML += `
+            <div class="product-card bg-white rounded-2xl border border-stone-100 overflow-hidden flex flex-col fade-up">
+                <div class="relative cursor-pointer" onclick="showDetails(${p.id})">
+                    <img src="${p.images[0]}" alt="${p.name}" class="w-full h-56 object-cover bg-stone-50" loading="lazy">
+                    ${badge ? `<div class="absolute top-3 left-3">${badge}</div>` : ''}
                 </div>
-                <p class="text-xs text-slate-400 mb-5 text-center">Order via WhatsApp — we'll confirm and send payment details</p>
-                <button onclick="checkoutViaWhatsApp()" class="wa-checkout w-full text-white py-4 rounded-full font-bold shadow-lg transition flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                    </svg>
-                    Order via WhatsApp
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast notification -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-full font-semibold text-sm shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-[100]"></div>
-
-    <!-- Footer -->
-    <footer class="bg-white py-14 border-t border-slate-100 mt-12">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <div class="font-display text-2xl font-extrabold tracking-tight text-slate-900 mb-6">NOVA<span class="text-orange-500">.</span></div>
-            <p class="text-slate-500 text-sm mb-2">Questions? WhatsApp us or email <a href="mailto:hello@novasastore.co.za" class="text-orange-500 font-semibold hover:underline">hello@novasastore.co.za</a></p>
-            <p class="text-slate-400 text-sm mb-6">Mon–Fri, 8am–6pm</p>
-            <div class="flex justify-center gap-8 mb-8 text-sm font-semibold text-slate-500">
-                <button onclick="toggleModal('termsModal')" class="hover:text-orange-500 transition">Terms &amp; Conditions</button>
-                <button onclick="toggleModal('returnModal')" class="hover:text-orange-500 transition">Return Policy</button>
-            </div>
-            <p class="text-slate-300 text-xs uppercase tracking-widest">&copy; 2026 Nova SA. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // ── Config — update this to your WhatsApp number ──────────────────────
-        // Format: country code + number, no spaces or symbols
-        // South Africa example: 27821234567
-        const WHATSAPP_NUMBER = '27XXXXXXXXX'; // ← Replace with your real number
-
-        // ── Products ──────────────────────────────────────────────────────────
-        const products = [
-            {
-                id: 1, name: "Rechargeable Hot Water Bottle", price: 399.00,
-                images: ["s-pdpxl.file (1) (1).jpg", "s-pdpxl.file.webp"],
-                weight: "1.2kg", dims: "22cm x 15cm",
-                badges: ["Best Seller", "Cordless"],
-                longDesc: "Ditch the traditional kettle. This electric hot water bottle heats up in just 10 minutes and retains warmth for up to 4 hours. Safety-first design prevents leaks and scalding — the perfect bedside companion for those freezing Highveld and Cape Town nights."
-            },
-            {
-                id: 2, name: "Office Heater", price: 499.00,
-                images: ["s-pdpxl.file (1).jpg", "s-pdpxl.file (13).jpg", "s-pdpxl.file.jpg"],
-                weight: "0.8kg", dims: "15cm x 15cm",
-                badges: ["Energy Efficient", "Silent"],
-                longDesc: "Stay comfortable at your desk without cranking up the whole house. This compact unit delivers focused warmth with minimal power consumption — silent operation means no distractions during calls, and built-in overheat protection keeps things safe all day."
-            },
-            {
-                id: 3, name: "Fleece Hoodie", price: 399.00,
-                images: ["s-pdpxl.file (1).webp", "s-pdpxl.file (3).jpg", "s-pdpxl.file (5).jpg"],
-                weight: "0.5kg", dims: "S/M/L/XL/2XL", hasSize: true,
-                badges: ["Unisex", "Up to 2XL"],
-                longDesc: "Experience the ultimate in couch-day luxury. This oversized hoodie features a premium, thick-pile fleece lining that traps body heat perfectly. The unisex design makes it an effortless gift or a winter essential for the whole family, available up to 2XL."
-            },
-            {
-                id: 4, name: "Auto-Heated Commuter Gloves", price: 699.00,
-                images: ["s-pdpxl.file (11).jpg", "s-pdpxl.file (12).jpg"],
-                weight: "0.3kg", dims: "Adjustable",
-                badges: ["Touchscreen Compatible", "USB Powered"],
-                longDesc: "For early morning commuters and outdoor enthusiasts who refuse to let the cold slow them down. These USB-powered gloves deliver consistent, gentle heat directly to your fingers without the bulk of traditional gloves — touchscreen-compatible fingertips included."
-            },
-            {
-                id: 5, name: "Portable Gas Heater", price: 699.00,
-                images: ["s-pdpxl.file (14).jpg", "s-zoom.file.jpg"],
-                weight: "1.5kg", dims: "Fits standard 220g–500g gas cylinders",
-                badges: ["Off-Grid", "High Output"],
-                longDesc: "Powerful, portable warmth wherever you need it. Transforms your standard portable gas cylinder into a high-output room heater — durable, easy to attach, and built for South African winters. Great for garages, outdoor braai areas, or rooms that need extra heat."
-            },
-            {
-                id: 6, name: "Smart Foldable Warming Tray", price: 1199.00,
-                images: ["s-pdpxl.file (9).jpg", "s-pdpxl.file (7).jpg"],
-                weight: "2.5kg", dims: "60cm x 40cm",
-                badges: ["Folds Flat"],
-                longDesc: "Never serve a cold meal again. This sleek electric warming tray keeps your plates at the perfect temperature from kitchen to table, so you can host without the stress. Folds flat for easy storage — a genuine upgrade to any SA home this winter."
-            },
-            {
-                id: 7, name: "Smart Temp Display Flask", price: 349.00,
-                images: ["s-zoom.file (10).jpg", "s-zoom.file (12).jpg"],
-                weight: "0.4kg", dims: "500ml",
-                badges: ["BPA-Free", "12hr Heat"],
-                longDesc: "No more guessing if your coffee is too hot. The high-precision LED display on the lid shows the exact temperature of your drink at a glance. Keeps beverages hot for up to 12 hours, cold for 24. Sleek, leak-proof, BPA-free — and a great gift idea."
-            },
-            {
-                id: 8, name: "Mini UPS for WiFi Router", price: 599.00,
-                images: ["s-zoom.file (15).jpg", "s-zoom.file.webp"],
-                weight: "0.6kg", dims: "10cm x 10cm",
-                badges: ["Plug & Play"],
-                longDesc: "Keep your WiFi running even when your power dips. This compact backup unit keeps your router online for hours — perfect for work-from-home professionals, students, or anyone who can't afford the interruption. Simple plug-and-play, no technical setup needed."
-            },
-            {
-                id: 9, name: "Motion Sensor LED Light", price: 369.00,
-                images: ["s-zoom.file (16).jpg", "s-zoom.file (18).jpg"],
-                weight: "0.2kg", dims: "10cm x 3cm",
-                badges: ["30-Day Battery", "Magnetic Mount"],
-                longDesc: "Navigate your home safely in the dark without fumbling for switches. These magnetic, motion-activated lights are perfect for hallways, cupboards, or bedside areas — automatically lighting your path. USB-rechargeable with an impressive 30-day battery life."
-            },
-            {
-                id: 10, name: "Thermal Fleece-Lined Leggings", price: 349.00,
-                images: ["s-zoom.file (6).jpg", "s-zoom.file (7).jpg"],
-                weight: "0.3kg", dims: "S/M/L/XL/2XL", hasSize: true,
-                badges: ["Inclusive Sizing", "Office & Home"],
-                longDesc: "Stay stylish and warm all winter long. These leggings have a hidden ultra-soft fleece interior that feels like a blanket against your skin — but look just like regular leggings from the outside. Perfect for the office, commute, or a cosy day at home. Available up to 2XL."
-            }
-        ];
-
-        // ── Render products ───────────────────────────────────────────────────
-        const grid = document.getElementById('productGrid');
-        products.forEach(p => {
-            const badge = (p.badges || []).slice(0, 1).map(b =>
-                `<span class="badge bg-orange-100 text-orange-600">${b}</span>`
-            ).join('');
-            grid.innerHTML += `
-                <div class="product-card bg-white rounded-3xl shadow-sm hover:shadow-xl border border-slate-100 overflow-hidden flex flex-col fade-up">
-                    <div class="relative cursor-pointer" onclick="showDetails(${p.id})">
-                        <img src="${p.images[0]}" alt="${p.name}" class="w-full h-56 object-cover bg-[#f4f3f0]" loading="lazy">
-                        ${badge ? `<div class="absolute top-3 left-3">${badge}</div>` : ''}
-                    </div>
-                    <div class="p-5 flex flex-col flex-grow">
-                        <h3 class="font-display font-bold text-lg mb-1 text-slate-900 leading-tight">${p.name}</h3>
-                        <p class="text-orange-500 font-bold text-base mb-4">R${p.price.toFixed(2)}</p>
-                        <div class="mt-auto flex gap-2">
-                            <button onclick="showDetails(${p.id})" class="flex-1 bg-slate-100 text-slate-700 px-4 py-2.5 rounded-full text-sm font-semibold hover:bg-slate-200 transition">Details</button>
-                            <button onclick="addToCartDirect(${p.id})" class="flex-1 bg-orange-500 text-white px-4 py-2.5 rounded-full text-sm font-bold hover:bg-orange-600 transition shadow-sm">Add to Cart</button>
-                        </div>
+                <div class="p-5 flex flex-col flex-grow">
+                    <h3 class="font-semibold text-base mb-1 text-slate-900 leading-snug">${p.name}</h3>
+                    <p class="text-orange-500 font-bold text-base mb-5">R${p.price.toFixed(2)}</p>
+                    <div class="mt-auto flex gap-2">
+                        <button onclick="showDetails(${p.id})" class="flex-1 bg-stone-100 text-slate-600 px-4 py-2.5 rounded-full text-sm font-medium hover:bg-stone-200 transition">Details</button>
+                        <button onclick="addToCart(${p.id})" class="flex-1 bg-orange-500 text-white px-4 py-2.5 rounded-full text-sm font-bold hover:bg-orange-600 transition">Add to Cart</button>
                     </div>
                 </div>
-            `;
-        });
+            </div>`;
+    });
 
-        // ── Cart state ────────────────────────────────────────────────────────
-        let cart = {}; // { productId: quantity }
+    // ── Cart ──────────────────────────────────────────────────────────────────
+    let cart = {};
 
-        function addToCartDirect(id) {
-            cart[id] = (cart[id] || 0) + 1;
-            updateCartUI();
-            const p = products.find(x => x.id == id);
-            showToast(`${p.name} added ✓`);
-        }
-
-        function removeFromCart(id) {
-            delete cart[id];
-            updateCartUI();
-        }
-
-        function changeQty(id, delta) {
-            const newQty = (cart[id] || 0) + delta;
-            if (newQty <= 0) { removeFromCart(id); return; }
-            cart[id] = newQty;
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const entries = Object.entries(cart);
-            const totalItems = entries.reduce((s, [, q]) => s + q, 0);
-            const totalPrice = entries.reduce((s, [id, q]) => s + products.find(p => p.id == id).price * q, 0);
-
-            document.getElementById('cartCount').innerText = totalItems;
-
-            const itemsEl = document.getElementById('cartItems');
-            if (entries.length === 0) {
-                itemsEl.innerHTML = '<p class="text-slate-400 text-sm text-center py-6">Your cart is empty.</p>';
-            } else {
-                itemsEl.innerHTML = entries.map(([id, qty]) => {
-                    const p = products.find(x => x.id == id);
-                    return `
-                        <div class="flex items-center gap-3 py-3 border-b border-slate-100">
-                            <img src="${p.images[0]}" alt="${p.name}" class="w-12 h-12 object-cover rounded-xl bg-slate-50 flex-shrink-0">
-                            <div class="flex-grow min-w-0">
-                                <p class="font-semibold text-sm text-slate-800 truncate">${p.name}</p>
-                                <p class="text-orange-500 font-bold text-sm">R${(p.price * qty).toFixed(2)}</p>
-                            </div>
-                            <div class="flex items-center gap-1 flex-shrink-0">
-                                <button onclick="changeQty(${id}, -1)" class="qty-btn text-slate-500 hover:text-slate-900">−</button>
-                                <span class="w-6 text-center font-bold text-sm">${qty}</span>
-                                <button onclick="changeQty(${id}, 1)" class="qty-btn text-slate-500 hover:text-slate-900">+</button>
-                                <button onclick="removeFromCart(${id})" class="qty-btn text-red-300 hover:text-red-500 hover:bg-red-50 ml-1" title="Remove">✕</button>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            }
-            document.getElementById('cartTotal').innerText = `R${totalPrice.toFixed(2)}`;
-        }
-
-        // ── Product detail modal ──────────────────────────────────────────────
-        function showDetails(id) {
-            const p = products.find(x => x.id === id);
-            document.getElementById('modalTitle').innerText = p.name;
-            document.getElementById('modalPrice').innerText = `R${p.price.toFixed(2)}`;
-            document.getElementById('modalDesc').innerText = p.longDesc;
-            document.getElementById('specWeight').innerText = p.weight;
-            document.getElementById('specDims').innerText = p.dims;
-            document.getElementById('mainModalImage').src = p.images[0];
-            document.getElementById('mainModalImage').alt = p.name;
-            document.getElementById('modalThumbnails').innerHTML = p.images.map(img =>
-                `<img onclick="document.getElementById('mainModalImage').src='${img}'" src="${img}" alt="${p.name}" class="w-20 h-20 object-cover rounded-xl cursor-pointer border-2 border-transparent hover:border-orange-500 shadow-sm bg-slate-50 flex-shrink-0">`
-            ).join('');
-            document.getElementById('sizeGuideBtnContainer').className = p.hasSize ? 'mb-4 block' : 'mb-4 hidden';
-            document.getElementById('modalBadges').innerHTML = (p.badges || []).map(b =>
-                `<span class="badge bg-slate-100 text-slate-600">${b}</span>`
-            ).join('');
-            document.getElementById('modalAddBtn').onclick = () => {
-                addToCartDirect(p.id);
-                toggleModal('detailsModal');
-            };
-            toggleModal('detailsModal');
-        }
-
-        // ── WhatsApp checkout ─────────────────────────────────────────────────
-        function checkoutViaWhatsApp() {
-            const entries = Object.entries(cart);
-            if (entries.length === 0) { showToast('Your cart is empty!'); return; }
-
-            const total = entries.reduce((s, [id, q]) => s + products.find(p => p.id == id).price * q, 0);
-            const lines = entries.map(([id, qty]) => {
-                const p = products.find(x => x.id == id);
-                return `• ${p.name} x${qty} — R${(p.price * qty).toFixed(2)}`;
-            });
-
-            const message = [
-                'Hi Nova SA! I\'d like to place an order 🛒',
-                '',
-                ...lines,
-                '',
-                `*Total: R${total.toFixed(2)}*`,
-                '',
-                'Please send me payment and delivery details. Thanks!'
-            ].join('\n');
-
-            const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
-        }
-
-        // ── Toast ─────────────────────────────────────────────────────────────
-        let toastTimeout;
-        function showToast(msg) {
-            const t = document.getElementById('toast');
-            t.innerText = msg;
-            t.style.opacity = '1';
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => { t.style.opacity = '0'; }, 2200);
-        }
-
-        // ── Modal helpers ─────────────────────────────────────────────────────
-        function toggleModal(id) {
-            const el = document.getElementById(id);
-            el.classList.toggle('modal-hidden');
-            el.classList.toggle('modal-active');
-        }
-        function toggleSizeGuide() { toggleModal('sizeGuideModal'); }
-
-        // Close on backdrop click
-        ['detailsModal', 'cartModal', 'termsModal', 'returnModal', 'sizeGuideModal'].forEach(id => {
-            document.getElementById(id).addEventListener('click', function(e) {
-                if (e.target === this) toggleModal(id);
-            });
-        });
-
-        // ── Snowflakes ────────────────────────────────────────────────────────
-        const snowContainer = document.getElementById('snowContainer');
-        for (let i = 0; i < 18; i++) {
-            const el = document.createElement('div');
-            el.className = 'snowflake';
-            el.innerText = ['❄', '❅', '❆'][Math.floor(Math.random() * 3)];
-            el.style.left = Math.random() * 100 + 'vw';
-            el.style.animationDuration = (8 + Math.random() * 12) + 's';
-            el.style.animationDelay = (Math.random() * 12) + 's';
-            el.style.fontSize = (10 + Math.random() * 10) + 'px';
-            snowContainer.appendChild(el);
-        }
-
+    function addToCart(id) {
+        cart[id] = (cart[id]||0) + 1;
         updateCartUI();
+        showToast(`${products.find(x=>x.id==id).name} added ✓`);
+    }
+    function removeFromCart(id) { delete cart[id]; updateCartUI(); }
+    function changeQty(id, d) {
+        const n = (cart[id]||0) + d;
+        if (n <= 0) removeFromCart(id); else { cart[id]=n; updateCartUI(); }
+    }
+    function updateCartUI() {
+        const entries = Object.entries(cart);
+        const total   = entries.reduce((s,[id,q])=>s+products.find(p=>p.id==id).price*q, 0);
+        document.getElementById('cartCount').innerText = entries.reduce((s,[,q])=>s+q, 0);
+        const el = document.getElementById('cartItems');
+        el.innerHTML = !entries.length
+            ? '<p class="text-slate-400 text-sm text-center py-6">Your cart is empty.</p>'
+            : entries.map(([id,qty]) => {
+                const p = products.find(x=>x.id==id);
+                return `<div class="flex items-center gap-3 py-3 border-b border-stone-100">
+                    <img src="${p.images[0]}" alt="${p.name}" class="w-12 h-12 object-cover rounded-xl bg-stone-50 flex-shrink-0">
+                    <div class="flex-grow min-w-0">
+                        <p class="font-semibold text-sm text-slate-800 truncate">${p.name}</p>
+                        <p class="text-orange-500 font-bold text-sm">R${(p.price*qty).toFixed(2)}</p>
+                    </div>
+                    <div class="flex items-center gap-1 flex-shrink-0">
+                        <button onclick="changeQty(${id},-1)" class="qty-btn text-slate-400 hover:text-slate-900">−</button>
+                        <span class="w-6 text-center font-bold text-sm">${qty}</span>
+                        <button onclick="changeQty(${id},1)" class="qty-btn text-slate-400 hover:text-slate-900">+</button>
+                        <button onclick="removeFromCart(${id})" class="qty-btn text-red-300 hover:text-red-500 hover:bg-red-50 ml-1" title="Remove">✕</button>
+                    </div>
+                </div>`;
+            }).join('');
+        document.getElementById('cartTotal').innerText = `R${total.toFixed(2)}`;
+    }
 
-        // ── Testimonials ──────────────────────────────────────────────────────
-        const testimonials = [
-            { stars: 5, text: "Ordered the hot water bottle on a Tuesday, had it by Thursday. Works exactly as described — heats up fast and stays warm for hours. Perfect for cold Jo'burg mornings.", author: "Lerato M.", location: "Johannesburg" },
-            { stars: 5, text: "The fleece hoodie is genuinely massive and so warm. My whole family fights over it now. Great value for money, will be buying another one.", author: "Pieter V.", location: "Pretoria" },
-            { stars: 5, text: "Bought the flask for my husband who commutes early. He loves being able to see the exact temperature. No more burnt tongue from his coffee!", author: "Nomsa D.", location: "Soweto" },
-            { stars: 4, text: "The office heater is super quiet which is exactly what I needed for Zoom calls. Delivery was quick and packaging was good.", author: "Ashleigh R.", location: "Cape Town" },
-            { stars: 5, text: "Motion sensor lights are a game changer for the passage at night. Kids love them too. Bought three sets already.", author: "Riaan B.", location: "Stellenbosch" },
-            { stars: 5, text: "Really happy with the leggings — they look normal but are so warm inside. Wore them to work all week and nobody even knew. Brilliant.", author: "Thandi K.", location: "Durban" },
-            { stars: 4, text: "The UPS for my router works well. Setup took about 2 minutes. Nice to have peace of mind knowing my WiFi stays on.", author: "Marco F.", location: "Port Elizabeth" },
-            { stars: 5, text: "Ordered two hot water bottles as gifts. Both arrived perfectly packed and on time. Will definitely shop here again this winter.", author: "Zanele N.", location: "East London" },
-            { stars: 5, text: "Gas heater is solid and powerful — perfect for our garage braai setup. Really well built. Nova SA had it delivered faster than I expected.", author: "Kobus S.", location: "Bloemfontein" },
-            { stars: 4, text: "The warming tray is a bit of a luxury item but honestly it's amazing for dinner parties. Food stays warm the whole evening. Very happy with the purchase.", author: "Melissa O.", location: "Sandton" },
-        ];
+    // ── Product detail modal ──────────────────────────────────────────────────
+    function showDetails(id) {
+        const p = products.find(x=>x.id===id);
+        document.getElementById('mTitle').innerText  = p.name;
+        document.getElementById('mPrice').innerText  = `R${p.price.toFixed(2)}`;
+        document.getElementById('mDesc').innerText   = p.longDesc;
+        document.getElementById('mWeight').innerText = p.weight;
+        document.getElementById('mDims').innerText   = p.dims;
+        document.getElementById('mainImg').src       = p.images[0];
+        document.getElementById('mainImg').alt       = p.name;
+        document.getElementById('thumbs').innerHTML  = p.images.map(img =>
+            `<img onclick="document.getElementById('mainImg').src='${img}'" src="${img}" alt="${p.name}" class="w-20 h-20 object-cover rounded-xl cursor-pointer border-2 border-transparent hover:border-orange-500 bg-stone-50 flex-shrink-0">`
+        ).join('');
+        document.getElementById('sizeBtn').className    = p.hasSize ? 'mb-4 block' : 'mb-4 hidden';
+        document.getElementById('mBadges').innerHTML    = (p.badges||[]).map(b=>`<span class="pill bg-stone-100 text-slate-600">${b}</span>`).join('');
+        document.getElementById('mAddBtn').onclick      = () => { addToCart(p.id); toggleModal('detailsModal'); };
+        toggleModal('detailsModal');
+    }
 
-        const track = document.getElementById('testimonialTrack');
-        const doubled = [...testimonials, ...testimonials];
-        doubled.forEach(t => {
-            track.innerHTML += `
-                <div class="testimonial-card">
-                    <div class="stars">${'★'.repeat(t.stars)}${'☆'.repeat(5 - t.stars)}</div>
-                    <p class="t-text">"${t.text}"</p>
-                    <p class="t-author">${t.author}</p>
-                    <p class="t-location">${t.location}</p>
-                </div>
-            `;
+    // ── WhatsApp checkout ─────────────────────────────────────────────────────
+    function checkoutViaWhatsApp() {
+        const entries = Object.entries(cart);
+        if (!entries.length) { showToast('Your cart is empty!'); return; }
+        const total = entries.reduce((s,[id,q])=>s+products.find(p=>p.id==id).price*q, 0);
+        const lines = entries.map(([id,qty])=>{
+            const p = products.find(x=>x.id==id);
+            return `• ${p.name} x${qty} — R${(p.price*qty).toFixed(2)}`;
         });
-    </script>
+        const msg = ["Hi Nova SA! I'd like to place an order 🛒","", ...lines,"",`*Total: R${total.toFixed(2)}*`,"","Please send me payment and delivery details. Thanks!"].join('\n');
+        window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,'_blank');
+    }
+
+    // ── Toast ─────────────────────────────────────────────────────────────────
+    let toastTimer;
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.innerText = msg; t.style.opacity='1';
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(()=>t.style.opacity='0', 2200);
+    }
+
+    // ── Modals ────────────────────────────────────────────────────────────────
+    function toggleModal(id) {
+        const el = document.getElementById(id);
+        el.classList.toggle('modal-hidden'); el.classList.toggle('modal-active');
+    }
+    function toggleSizeGuide() { toggleModal('sizeGuideModal'); }
+    ['detailsModal','cartModal','termsModal','returnModal','sizeGuideModal'].forEach(id=>{
+        document.getElementById(id).addEventListener('click',function(e){ if(e.target===this) toggleModal(id); });
+    });
+
+    // ── Testimonials ──────────────────────────────────────────────────────────
+    const reviews = [
+        { stars:5, text:"Ordered the hot water bottle on a Tuesday, had it by Thursday. Heats up fast and stays warm for hours. Perfect for cold Jo'burg mornings.", name:"Lerato M.", city:"Johannesburg" },
+        { stars:5, text:"The fleece hoodie is genuinely massive and so warm. My whole family fights over it now. Great value — will definitely buy another one.", name:"Pieter V.", city:"Pretoria" },
+        { stars:5, text:"Bought the flask for my husband who commutes early. He loves seeing the exact temperature on the lid. No more burnt tongue from his coffee!", name:"Nomsa D.", city:"Soweto" },
+        { stars:4, text:"The office heater is super quiet — exactly what I needed for Zoom calls. Delivery was quick and packaging was great.", name:"Ashleigh R.", city:"Cape Town" },
+        { stars:5, text:"Motion sensor lights are a game changer for the passage at night. The kids love them too. Already bought three sets.", name:"Riaan B.", city:"Stellenbosch" },
+        { stars:5, text:"Really happy with the leggings — they look completely normal but are so warm inside. Wore them to work all week and nobody even knew.", name:"Thandi K.", city:"Durban" },
+        { stars:4, text:"The UPS for my router works perfectly. Took about 2 minutes to set up. Good peace of mind knowing the WiFi stays on.", name:"Marco F.", city:"Gqeberha" },
+        { stars:5, text:"Ordered two hot water bottles as gifts. Both arrived perfectly packed and on time. Will definitely shop here again this winter.", name:"Zanele N.", city:"East London" },
+        { stars:5, text:"Gas heater is solid and powerful — perfect for our garage braai setup. Well built and delivered faster than I expected.", name:"Kobus S.", city:"Bloemfontein" },
+        { stars:4, text:"The warming tray is a luxury but honestly amazing for dinner parties. Food stays warm the whole evening. Very happy.", name:"Melissa O.", city:"Sandton" },
+    ];
+    const track = document.getElementById('tTrack');
+    [...reviews,...reviews].forEach(r=>{
+        track.innerHTML += `
+            <div class="t-card">
+                <div class="t-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+                <p class="t-text">"${r.text}"</p>
+                <p class="t-name">${r.name}</p>
+                <p class="t-city">${r.city}</p>
+            </div>`;
+    });
+
+    // ── Snowflakes ────────────────────────────────────────────────────────────
+    const snow = document.getElementById('snow');
+    for (let i=0;i<16;i++){
+        const el=document.createElement('div'); el.className='flake';
+        el.innerText=['❄','❅','❆'][i%3];
+        el.style.cssText=`left:${Math.random()*100}vw;animation-duration:${9+Math.random()*14}s;animation-delay:${Math.random()*14}s;font-size:${10+Math.random()*10}px`;
+        snow.appendChild(el);
+    }
+
+    updateCartUI();
+</script>
 </body>
 </html>
