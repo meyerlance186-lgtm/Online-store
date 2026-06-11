@@ -189,19 +189,99 @@
 
 <!-- Terms -->
 <div id="termsModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
-    <div class="bg-white p-8 rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto shadow-2xl">
-        <h3 class="serif font-bold text-2xl mb-4">Terms &amp; Conditions</h3>
-        <p class="text-sm text-slate-500 leading-relaxed mb-4">By purchasing from Nova SA, you agree to our terms. Prices include VAT where applicable. All orders are subject to stock availability and payment verification. Nova SA reserves the right to cancel orders that cannot be fulfilled.</p>
-        <button onclick="toggleModal('termsModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition">Close</button>
+    <div class="bg-white p-8 rounded-2xl max-w-xl w-full max-h-[85vh] overflow-y-auto shadow-2xl">
+        <h3 class="serif font-bold text-2xl mb-1">Terms &amp; Conditions</h3>
+        <p class="text-xs text-slate-400 mb-6 uppercase tracking-wider">Last Updated: 10 June 2026</p>
+        <div class="text-sm text-slate-600 leading-relaxed space-y-5">
+            <p>Welcome to Nova SA (<a href="https://novasastore.co.za" class="text-orange-500 hover:underline">novasastore.co.za</a>). These Terms and Conditions govern your use of our website and the purchase of any goods from our online store. By accessing or using our website, you agree to be bound by these terms.</p>
+            <div>
+                <p class="font-semibold text-slate-800 mb-1">1. Electronic Communications</p>
+                <p>By visiting our website or sending emails to us, you consent to receive communications from us electronically. You agree that all agreements, notices, disclosures, and other communications we provide electronically satisfy any legal requirement that such communications be in writing.</p>
+            </div>
+            <div>
+                <p class="font-semibold text-slate-800 mb-1">2. Product Information and Pricing</p>
+                <p>Nova SA specialises in seasonal winter comfort gear and home essentials. All prices are quoted in South African Rand (ZAR) and are valid within the Republic of South Africa only. Nova SA reserves the right to alter pricing or discontinue products at any time without prior notice.</p>
+            </div>
+            <div>
+                <p class="font-semibold text-slate-800 mb-1">3. Online Purchases and Payments</p>
+                <p>By placing an order, you confirm that you are at least 18 years of age and possess the legal capacity to enter into a binding contract. Payment is securely processed via PayFast. Orders will only be processed and dispatched once full payment validation has been received.</p>
+            </div>
+            <div>
+                <p class="font-semibold text-slate-800 mb-1">4. Limitation of Liability</p>
+                <p>Nova SA, its directors, and employees shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from the use of, or inability to use, the materials or products provided on this site.</p>
+            </div>
+            <div>
+                <p class="font-semibold text-slate-800 mb-1">5. Governing Law</p>
+                <p>This website is controlled, operated, and administered from within the Republic of South Africa. These Terms and Conditions shall be governed by and construed in accordance with the laws of the Republic of South Africa.</p>
+            </div>
+        </div>
+        <button onclick="toggleModal('termsModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition mt-8">Close</button>
+    </div>
+</div>
+
+<!-- Shipping -->
+<div id="shippingModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
+    <div class="bg-white p-8 rounded-2xl max-w-xl w-full max-h-[85vh] overflow-y-auto shadow-2xl">
+        <h3 class="serif font-bold text-2xl mb-1">Shipping &amp; Delivery</h3>
+        <p class="text-xs text-slate-400 mb-6 uppercase tracking-wider">Last Updated: 10 June 2026</p>
+        <div class="text-sm text-slate-600 leading-relaxed space-y-5">
+            <p>Nova SA ships exclusively within the Republic of South Africa via trusted door-to-door courier networks.</p>
+            <div>
+                <p class="font-semibold text-slate-800 mb-2">Shipping Rates</p>
+                <div class="bg-stone-50 rounded-xl p-4 space-y-2">
+                    <div class="flex justify-between"><span>Standard flat-rate shipping</span><span class="font-semibold text-slate-800">R99.00</span></div>
+                    <div class="border-t border-stone-200 pt-2 flex justify-between"><span>Orders over R800</span><span class="font-semibold text-orange-500">Free ✓</span></div>
+                </div>
+            </div>
+            <div>
+                <p class="font-semibold text-slate-800 mb-2">Delivery Timeframes</p>
+                <p class="mb-2">Orders are dispatched within 1 business day of payment confirmation.</p>
+                <div class="bg-stone-50 rounded-xl p-4 space-y-2 text-sm">
+                    <div class="flex justify-between"><span>Cape Town, Johannesburg, Pretoria, Durban</span><span class="font-semibold text-slate-800">2–4 business days</span></div>
+                    <div class="border-t border-stone-200 pt-2 flex justify-between"><span>Regional &amp; outlying areas</span><span class="font-semibold text-slate-800">3–5 business days</span></div>
+                </div>
+                <p class="mt-3 text-slate-400 text-xs">No deliveries on weekends or public holidays.</p>
+            </div>
+            <div>
+                <p class="font-semibold text-slate-800 mb-1">Order Tracking</p>
+                <p>Once your parcel is collected by our courier partner, an automated email containing a unique tracking link will be sent to your registered email address.</p>
+            </div>
+            <div>
+                <p class="font-semibold text-slate-800 mb-1">Delivery Address</p>
+                <p>We deliver door-to-door only. We cannot deliver to P.O. Box addresses. Please ensure a valid physical address and a reachable daytime contact number are provided when placing your order.</p>
+            </div>
+        </div>
+        <button onclick="toggleModal('shippingModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition mt-8">Close</button>
     </div>
 </div>
 
 <!-- Returns -->
 <div id="returnModal" class="modal-hidden fixed inset-0 bg-black/50 z-[80] justify-center items-center p-4">
-    <div class="bg-white p-8 rounded-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto shadow-2xl">
-        <h3 class="serif font-bold text-2xl mb-4">Return Policy</h3>
-        <p class="text-sm text-slate-500 leading-relaxed mb-4">We accept returns within 7 days of delivery if the item is unused and in original packaging. Contact us at <a href="mailto:hello@novasastore.co.za" class="text-orange-500 font-semibold hover:underline">hello@novasastore.co.za</a> to initiate a return. Return shipping is for the customer's account.</p>
-        <button onclick="toggleModal('returnModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition">Close</button>
+    <div class="bg-white p-8 rounded-2xl max-w-xl w-full max-h-[85vh] overflow-y-auto shadow-2xl">
+        <h3 class="serif font-bold text-2xl mb-1">Refund &amp; Return Policy</h3>
+        <p class="text-xs text-slate-400 mb-6 uppercase tracking-wider">Last Updated: 10 June 2026</p>
+        <div class="text-sm text-slate-600 leading-relaxed space-y-5">
+            <p>At Nova SA, customer satisfaction is our highest priority. Our policies are aligned with the South African Consumer Protection Act (CPA).</p>
+            <div>
+                <p class="font-semibold text-slate-800 mb-1">1. 7-Day Change of Mind / Cooling-Off Period</p>
+                <p>If you are not completely satisfied with your purchase, you have the right to return any item within 7 days of receipt for an exchange or a full refund.</p>
+                <ul class="list-disc list-inside mt-2 space-y-1 text-slate-500">
+                    <li>Items must be entirely unused and in their original packaging with all tags intact.</li>
+                    <li>Apparel items must not have been worn or washed.</li>
+                    <li>The customer is responsible for arranging and paying return courier fees.</li>
+                </ul>
+            </div>
+            <div>
+                <p class="font-semibold text-slate-800 mb-1">2. Defective, Damaged, or Faulty Goods</p>
+                <p>In the unlikely event that a product arrives damaged or develops a manufacturing defect, please notify us immediately by emailing <a href="mailto:info@novasastore.co.za" class="text-orange-500 font-semibold hover:underline">info@novasastore.co.za</a> with your order number and clear photographic or video evidence.</p>
+                <p class="mt-2">If an electronic item is found to be defective within 6 months of delivery, Nova SA will arrange courier collection at our own expense. Upon inspection, we will provide a replacement, store credit, or full refund per your preference.</p>
+            </div>
+            <div>
+                <p class="font-semibold text-slate-800 mb-1">3. Processing of Refunds</p>
+                <p>Approved refunds are processed back to the original payment method via PayFast. Please allow 3 to 7 business days for funds to reflect in your account.</p>
+            </div>
+        </div>
+        <button onclick="toggleModal('returnModal')" class="w-full bg-slate-900 text-white py-3 rounded-xl font-bold hover:bg-black transition mt-8">Close</button>
     </div>
 </div>
 
@@ -235,11 +315,12 @@
 <footer class="bg-white py-14 border-t border-stone-100">
     <div class="max-w-4xl mx-auto px-6 text-center">
         <div class="serif text-2xl font-bold text-slate-900 mb-5">NOVA<span class="text-orange-500">.</span></div>
-        <p class="text-slate-500 text-sm mb-1">Questions? Email us at <a href="mailto:hello@novasastore.co.za" class="text-orange-500 font-semibold hover:underline">hello@novasastore.co.za</a></p>
+        <p class="text-slate-500 text-sm mb-1">Questions? Email us at <a href="mailto:info@novasastore.co.za" class="text-orange-500 font-semibold hover:underline">info@novasastore.co.za</a></p>
         <p class="text-slate-400 text-sm mb-7">Mon–Fri, 8am–6pm</p>
         <div class="flex justify-center gap-8 mb-6 text-sm font-semibold text-slate-400">
             <button onclick="toggleModal('termsModal')" class="hover:text-orange-500 transition">Terms &amp; Conditions</button>
-            <button onclick="toggleModal('returnModal')" class="hover:text-orange-500 transition">Return Policy</button>
+            <button onclick="toggleModal('shippingModal')" class="hover:text-orange-500 transition">Shipping &amp; Delivery</button>
+            <button onclick="toggleModal('returnModal')" class="hover:text-orange-500 transition">Returns &amp; Refunds</button>
         </div>
         <p class="text-stone-300 text-xs uppercase tracking-widest">&copy; 2026 Nova SA. All rights reserved.</p>
     </div>
@@ -370,7 +451,7 @@
         el.classList.toggle('modal-hidden'); el.classList.toggle('modal-active');
     }
     function toggleSizeGuide() { toggleModal('sizeGuideModal'); }
-    ['detailsModal','cartModal','termsModal','returnModal','sizeGuideModal'].forEach(id=>{
+    ['detailsModal','cartModal','termsModal','shippingModal','returnModal','sizeGuideModal'].forEach(id=>{
         document.getElementById(id).addEventListener('click',function(e){ if(e.target===this) toggleModal(id); });
     });
 
