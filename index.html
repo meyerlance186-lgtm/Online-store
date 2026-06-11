@@ -106,34 +106,31 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="productGrid"></div>
 </main>
 
-<!-- ── Testimonials Section ── -->
-<section id="reviews" class="bg-stone-100 border-y border-stone-200 py-20 overflow-hidden">
-    <div class="max-w-6xl mx-auto px-6 text-center mb-10">
-        <p class="overline mb-2">Customer Reviews</p>
-        <h2 class="serif text-3xl font-bold text-slate-900 mb-2">What South Africans are saying</h2>
-        <p class="text-slate-500 text-sm">Real orders. Real customers. Real winters survived.</p>
-        <!-- Stats row -->
-        <div class="flex items-center justify-center gap-8 mt-8">
+<!-- ── Trust Bar ── -->
+<section class="bg-stone-100 border-y border-stone-200 py-10">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
-                <p class="serif text-4xl font-bold text-slate-900">4.8</p>
-                <p class="text-orange-500 text-base tracking-widest">★★★★★</p>
-                <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider">Avg rating</p>
+                <p class="text-2xl mb-1">🇿🇦</p>
+                <p class="font-semibold text-slate-800 text-sm">South African Owned</p>
+                <p class="text-slate-400 text-xs mt-0.5">Proudly local</p>
             </div>
-            <div class="w-px h-14 bg-stone-300"></div>
             <div>
-                <p class="serif text-4xl font-bold text-slate-900">47+</p>
-                <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider">Orders placed</p>
+                <p class="text-2xl mb-1">🔒</p>
+                <p class="font-semibold text-slate-800 text-sm">Secure Payments</p>
+                <p class="text-slate-400 text-xs mt-0.5">Powered by PayFast</p>
             </div>
-            <div class="w-px h-14 bg-stone-300"></div>
             <div>
-                <p class="serif text-4xl font-bold text-slate-900">100%</p>
-                <p class="text-slate-400 text-xs mt-1 uppercase tracking-wider">Would recommend</p>
+                <p class="text-2xl mb-1">🚚</p>
+                <p class="font-semibold text-slate-800 text-sm">Fast Delivery</p>
+                <p class="text-slate-400 text-xs mt-0.5">2–5 business days</p>
+            </div>
+            <div>
+                <p class="text-2xl mb-1">↩️</p>
+                <p class="font-semibold text-slate-800 text-sm">7-Day Returns</p>
+                <p class="text-slate-400 text-xs mt-0.5">CPA compliant</p>
             </div>
         </div>
-    </div>
-    <!-- Scrolling carousel -->
-    <div style="overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,black 7%,black 93%,transparent);mask-image:linear-gradient(to right,transparent,black 7%,black 93%,transparent);">
-        <div class="t-track" id="tTrack"></div>
     </div>
 </section>
 
@@ -455,29 +452,7 @@
         document.getElementById(id).addEventListener('click',function(e){ if(e.target===this) toggleModal(id); });
     });
 
-    // ── Testimonials ──────────────────────────────────────────────────────────
-    const reviews = [
-        { stars:5, text:"Ordered the hot water bottle on a Tuesday, had it by Thursday. Heats up fast and stays warm for hours. Perfect for cold Jo'burg mornings.", name:"Lerato M.", city:"Johannesburg" },
-        { stars:5, text:"The fleece hoodie is genuinely massive and so warm. My whole family fights over it now. Great value — will definitely buy another one.", name:"Pieter V.", city:"Pretoria" },
-        { stars:5, text:"Bought the flask for my husband who commutes early. He loves seeing the exact temperature on the lid. No more burnt tongue from his coffee!", name:"Nomsa D.", city:"Soweto" },
-        { stars:4, text:"The office heater is super quiet — exactly what I needed for Zoom calls. Delivery was quick and packaging was great.", name:"Ashleigh R.", city:"Cape Town" },
-        { stars:5, text:"Motion sensor lights are a game changer for the passage at night. The kids love them too. Already bought three sets.", name:"Riaan B.", city:"Stellenbosch" },
-        { stars:5, text:"Really happy with the leggings — they look completely normal but are so warm inside. Wore them to work all week and nobody even knew.", name:"Thandi K.", city:"Durban" },
-        { stars:4, text:"The UPS for my router works perfectly. Took about 2 minutes to set up. Good peace of mind knowing the WiFi stays on.", name:"Marco F.", city:"Gqeberha" },
-        { stars:5, text:"Ordered two hot water bottles as gifts. Both arrived perfectly packed and on time. Will definitely shop here again this winter.", name:"Zanele N.", city:"East London" },
-        { stars:5, text:"Gas heater is solid and powerful — perfect for our garage braai setup. Well built and delivered faster than I expected.", name:"Kobus S.", city:"Bloemfontein" },
-        { stars:4, text:"The warming tray is a luxury but honestly amazing for dinner parties. Food stays warm the whole evening. Very happy.", name:"Melissa O.", city:"Sandton" },
-    ];
-    const track = document.getElementById('tTrack');
-    [...reviews,...reviews].forEach(r=>{
-        track.innerHTML += `
-            <div class="t-card">
-                <div class="t-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
-                <p class="t-text">"${r.text}"</p>
-                <p class="t-name">${r.name}</p>
-                <p class="t-city">${r.city}</p>
-            </div>`;
-    });
+    // ── Testimonials placeholder (add real reviews here once orders come in) ──
 
     // ── Snowflakes ────────────────────────────────────────────────────────────
     const snow = document.getElementById('snow');
