@@ -55,16 +55,6 @@
         .flake { pointer-events:none;position:fixed;top:-20px;opacity:.25;animation:fall linear infinite;z-index:0;user-select:none; }
         @keyframes fall { to{transform:translateY(110vh) rotate(360deg)} }
 
-        /* ── Testimonials ── */
-        .t-track { display:flex;gap:18px;width:max-content;animation:scrollL 45s linear infinite; }
-        .t-track:hover { animation-play-state:paused; }
-        @keyframes scrollL { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-        .t-card { background:#fff;border:1px solid #e8e4dd;border-radius:16px;padding:22px 24px;width:278px;flex-shrink:0; }
-        .t-stars { color:#f97316;font-size:13px;letter-spacing:2px;margin-bottom:9px; }
-        .t-text  { font-size:14px;color:#4b5563;line-height:1.65;margin-bottom:13px;font-style:italic; }
-        .t-name  { font-size:13px;font-weight:600;color:#111827; }
-        .t-city  { font-size:12px;color:#9ca3af;margin-top:1px; }
-
         /* ── Overline label ── */
         .overline { font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#f97316; }
 
@@ -142,6 +132,37 @@
                 <p class="font-semibold text-slate-800 text-sm">7-Day Returns</p>
                 <p class="text-slate-400 text-xs mt-0.5">CPA compliant</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Our Promise ── -->
+<section class="bg-white py-16">
+    <div class="max-w-6xl mx-auto px-6 mb-10 text-center">
+        <p class="overline mb-2">Our Promise</p>
+        <h2 class="serif text-3xl font-bold text-slate-900">What You Can Expect</h2>
+        <p class="text-slate-500 text-sm mt-3 max-w-md mx-auto">We're a new South African store — here's exactly how we operate, no surprises.</p>
+    </div>
+    <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+        <div class="bg-stone-50 rounded-2xl p-6 text-center border border-stone-100">
+            <p class="text-2xl mb-2">🇿🇦</p>
+            <p class="font-semibold text-slate-800 text-sm mb-1">South African Owned</p>
+            <p class="text-slate-500 text-xs leading-relaxed">A small, local business — we read and reply to every WhatsApp message ourselves.</p>
+        </div>
+        <div class="bg-stone-50 rounded-2xl p-6 text-center border border-stone-100">
+            <p class="text-2xl mb-2">📦</p>
+            <p class="font-semibold text-slate-800 text-sm mb-1">1-Day Dispatch</p>
+            <p class="text-slate-500 text-xs leading-relaxed">Orders are dispatched within 1 business day of payment confirmation, with tracking sent straight to your inbox.</p>
+        </div>
+        <div class="bg-stone-50 rounded-2xl p-6 text-center border border-stone-100">
+            <p class="text-2xl mb-2">🚚</p>
+            <p class="font-semibold text-slate-800 text-sm mb-1">Nationwide Delivery</p>
+            <p class="text-slate-500 text-xs leading-relaxed">2–5 business days anywhere in South Africa, with free delivery on orders over R800.</p>
+        </div>
+        <div class="bg-stone-50 rounded-2xl p-6 text-center border border-stone-100">
+            <p class="text-2xl mb-2">↩️</p>
+            <p class="font-semibold text-slate-800 text-sm mb-1">7-Day Returns</p>
+            <p class="text-slate-500 text-xs leading-relaxed">Full CPA-compliant cooling-off period. Change your mind within 7 days, no hassle.</p>
         </div>
     </div>
 </section>
@@ -351,7 +372,7 @@
 
     // ── Products ──────────────────────────────────────────────────────────────
     const products = [
-        { id:1,  name:"Rechargeable Hot Water Bottle",  price:399.00, images:["s-pdpxl.file (1) (1).jpg","s-pdpxl.file.webp"],                   weight:"1.2kg",  dims:"22cm x 15cm",               badges:["Best Seller","Cordless"],              longDesc:"Ditch the traditional kettle. This electric hot water bottle heats up in just 10 minutes and retains warmth for up to 4 hours. Safety-first design prevents leaks and scalding — the perfect bedside companion for cold winter nights, wherever you are in South Africa." },
+        { id:1,  name:"Rechargeable Hot Water Bottle",  price:399.00, images:["s-pdpxl.file (1) (1).jpg","s-pdpxl.file.webp"],                   weight:"1.2kg",  dims:"22cm x 15cm",               badges:["Customer Favourite","Cordless"],              longDesc:"Ditch the traditional kettle. This electric hot water bottle heats up in just 10 minutes and retains warmth for up to 4 hours. Safety-first design prevents leaks and scalding — the perfect bedside companion for cold winter nights, wherever you are in South Africa." },
         { id:2,  name:"Office Heater",                  price:499.00, images:["s-pdpxl.file (1).jpg","s-pdpxl.file (13).jpg","s-pdpxl.file.jpg"], weight:"0.8kg",  dims:"15cm x 15cm",               badges:["Energy Efficient","Silent"],           longDesc:"Stay comfortable at your desk without cranking up the whole house. This compact unit delivers focused warmth with minimal power consumption — silent operation means no distractions during calls, and built-in overheat protection keeps things safe all day." },
         { id:3,  name:"Fleece Hoodie",                  price:399.00, images:["s-pdpxl.file (1).webp","s-pdpxl.file (3).jpg","s-pdpxl.file (5).jpg"], weight:"0.5kg", dims:"S/M/L/XL/2XL", hasSize:true, badges:["Unisex","Up to 2XL"],            longDesc:"Experience the ultimate in couch-day luxury. This oversized hoodie features a premium, thick-pile fleece lining that traps body heat perfectly. The unisex design makes it an effortless gift or a winter essential for the whole family, available up to 2XL." },
         { id:4,  name:"Auto-Heated Commuter Gloves",    price:699.00, images:["s-pdpxl.file (11).jpg","s-pdpxl.file (12).jpg"],                    weight:"0.3kg",  dims:"Adjustable",                badges:["Touchscreen Compatible","USB Powered"],longDesc:"For early morning commuters and outdoor enthusiasts who refuse to let the cold slow them down. These USB-powered gloves deliver consistent, gentle heat directly to your fingers without the bulk of traditional gloves — touchscreen-compatible fingertips included." },
